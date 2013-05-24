@@ -8,172 +8,154 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 
+public class BulletGraph extends Push {
 
-public class BulletGraph extends Push
-{
+    public enum Color {
+        RED( "red" ), AMBER( "amber" ), GREEN( "green" );
+        private final String json;
 
-    private final boolean vertical;
-    private final List<Item> items = new LinkedList<Item>();
-    private Item current = null;
-
-    public BulletGraph(String widgetKey, boolean vertical)
-    {
-        super(widgetKey);
-        this.vertical = vertical;
-    }
-
-    public void addItem()
-    {
-        current = new Item();
-        items.add(current);
-    }
-
-    public void setLabel(String label)
-    {
-        current.label = label;
-    }
-
-    public void setSubLabel(String subLabel)
-    {
-        current.subLabel = subLabel;
-    }
-
-    public void setAxisPoints(List<Integer> points)
-    {
-        current.axisPoints.addAll(points);
-    }
-
-    public void addRange(int start, int end, Color color)
-    {
-        current.ranges.add(new Range(start, end, color));
-    }
-
-    public void setCurrent(int start, int end)
-    {
-        current.current = new Position(start, end);
-    }
-
-    public void setProjected(int start, int end)
-    {
-        current.projected = new Position(start, end);
-    }
-
-    public void setComparative(int position)
-    {
-        current.comparative = position;
-    }
-
-    @Override
-    protected void getData(ObjectNode node)
-    {
-        ArrayNode itemsNode = node.arrayNode();
-        for (Item i : items)
-        {
-            itemsNode.add(i.toJson());
-        }
-        node.put("item", itemsNode);
-        if (vertical)
-        {
-            node.put("orientation", "vertial");
-        }
-        else
-        {
-            node.put("orientation", "horizontal");
+        private Color( String json ) {
+            this.json = json;
         }
     }
 
-    private static class Item
-    {
-        private String label;
-        private String subLabel;
+    private static class Item {
+        private String        label;
+
+        private String        subLabel;
+
         private List<Integer> axisPoints = new LinkedList<Integer>();
-        private List<Range> ranges = new LinkedList<Range>();
-        private Position current;
-        private Position projected;
-        private int comparative;
 
-        public ObjectNode toJson()
-        {
+        private List<Range>   ranges     = new LinkedList<Range>();
+
+        private Position      current;
+
+        private Position      projected;
+
+        private int           comparative;
+
+        public ObjectNode toJson() {
             ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
-            node.put("label", label);
-            if (subLabel != null)
-            {
-                node.put("sublabel", subLabel);
+            node.put( "label", label );
+            if ( subLabel != null ) {
+                node.put( "sublabel", subLabel );
             }
             ObjectNode axis = node.objectNode();
-            node.put("axis", axis);
+            node.put( "axis", axis );
             ArrayNode point = axis.arrayNode();
-            axis.put("point", point);
-            for (int pt : axisPoints)
-            {
-                point.add(pt);
+            axis.put( "point", point );
+            for ( int pt : axisPoints ) {
+                point.add( pt );
             }
             ArrayNode range = node.arrayNode();
-            node.put("range", range);
-            for (Range rng : ranges)
-            {
-                range.add(rng.toJson());
+            node.put( "range", range );
+            for ( Range rng : ranges ) {
+                range.add( rng.toJson() );
             }
             ObjectNode measure = node.objectNode();
-            node.put("measure", measure);
-            measure.put("current", current.toJson());
-            measure.put("projected", projected.toJson());
+            node.put( "measure", measure );
+            measure.put( "current", current.toJson() );
+            measure.put( "projected", projected.toJson() );
             ObjectNode comparativeNode = node.objectNode();
-            comparativeNode.put("point", comparative);
-            measure.put("comparative", comparativeNode);
+            comparativeNode.put( "point", comparative );
+            measure.put( "comparative", comparativeNode );
             return node;
         }
     }
 
-    private static class Position
-    {
+    private static class Position {
         protected int start;
+
         protected int end;
 
-        public Position(int start, int end)
-        {
+        public Position( int start, int end ) {
             super();
             this.start = start;
             this.end = end;
         }
 
-        public ObjectNode toJson()
-        {
+        public ObjectNode toJson() {
             ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
-            node.put("start", start);
-            node.put("end", end);
+            node.put( "start", start );
+            node.put( "end", end );
             return node;
         }
     }
 
-    private static class Range extends Position
-    {
+    private static class Range extends Position {
         private Color color;
 
-        public Range(int start, int end, Color color)
-        {
-            super(start, end);
+        public Range( int start, int end, Color color ) {
+            super( start, end );
             this.color = color;
         }
 
-        public ObjectNode toJson()
-        {
+        @Override
+        public ObjectNode toJson() {
             ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
-            node.put("color", color.json);
-            node.put("start", start);
-            node.put("end", end);
+            node.put( "color", color.json );
+            node.put( "start", start );
+            node.put( "end", end );
             return node;
         }
     }
 
-    public enum Color
-    {
-        RED("red"), AMBER("amber"), GREEN("green");
-        private final String json;
+    private final boolean    vertical;
 
-        private Color(String json)
-        {
-            this.json = json;
+    private final List<Item> items   = new LinkedList<Item>();
+
+    private Item             current = null;
+
+    public BulletGraph( String widgetKey, boolean vertical ) {
+        super( widgetKey );
+        this.vertical = vertical;
+    }
+
+    public void addItem() {
+        current = new Item();
+        items.add( current );
+    }
+
+    public void addRange( int start, int end, Color color ) {
+        current.ranges.add( new Range( start, end, color ) );
+    }
+
+    @Override
+    protected void getData( ObjectNode node ) {
+        ArrayNode itemsNode = node.arrayNode();
+        for ( Item i : items ) {
+            itemsNode.add( i.toJson() );
         }
+        node.put( "item", itemsNode );
+        if ( vertical ) {
+            node.put( "orientation", "vertial" );
+        }
+        else {
+            node.put( "orientation", "horizontal" );
+        }
+    }
+
+    public void setAxisPoints( List<Integer> points ) {
+        current.axisPoints.addAll( points );
+    }
+
+    public void setComparative( int position ) {
+        current.comparative = position;
+    }
+
+    public void setCurrent( int start, int end ) {
+        current.current = new Position( start, end );
+    }
+
+    public void setLabel( String label ) {
+        current.label = label;
+    }
+
+    public void setProjected( int start, int end ) {
+        current.projected = new Position( start, end );
+    }
+
+    public void setSubLabel( String subLabel ) {
+        current.subLabel = subLabel;
     }
 }
