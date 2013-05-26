@@ -5,19 +5,20 @@ import java.util.List;
 
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.type.GraphType;
 
 public class FunnelGraph extends Push {
 	private final List<Data> data = new LinkedList<Data>();
 
-	private final FunnelGraphType type;
+	private final GraphType type;
 
 	private final boolean showPercentage;
 
 	public FunnelGraph(String widgetKey, boolean showPercentage) {
-		this(widgetKey, FunnelGraphType.STANDARD, showPercentage);
+		this(widgetKey, GraphType.STANDARD, showPercentage);
 	}
 
-	public FunnelGraph(String widgetKey, FunnelGraphType type,
+	public FunnelGraph(String widgetKey, GraphType type,
 			boolean showPercentage) {
 		super(widgetKey);
 		this.type = type;
@@ -37,9 +38,5 @@ public class FunnelGraph extends Push {
 			data.put("percentage", "hide");
 		}
 		addData(data, this.data);
-	}
-
-	enum FunnelGraphType {
-		STANDARD, REVERSE;
 	}
 }

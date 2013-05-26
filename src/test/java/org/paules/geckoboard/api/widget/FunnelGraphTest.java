@@ -8,13 +8,13 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
-import org.paules.geckoboard.api.widget.FunnelGraph.FunnelGraphType;
+import org.paules.geckoboard.api.type.GraphType;
 
 public class FunnelGraphTest {
 
 	@Test
 	public void testJson() throws JsonProcessingException, IOException {
-		FunnelGraph widget = new FunnelGraph("1234", FunnelGraphType.STANDARD, false);
+		FunnelGraph widget = new FunnelGraph("1234", GraphType.STANDARD, false);
 		widget.addData("Step 1", "100");
 		widget.addData("Step 2", "200");
 		widget.addData("Step 3", "300");
