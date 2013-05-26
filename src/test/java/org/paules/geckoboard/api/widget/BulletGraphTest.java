@@ -14,7 +14,7 @@ import org.paules.geckoboard.api.widget.BulletGraph.Color;
 public class BulletGraphTest {
 
 	@Test
-	public void testGetData() throws JsonProcessingException, IOException {
+	public void testJson() throws JsonProcessingException, IOException {
 		BulletGraph widget = new BulletGraph("1234", false);
 		widget.addItem();
 		widget.setAxisPoints(Arrays.asList(new Integer[]{1,2,3,4,8,0}));
@@ -28,11 +28,8 @@ public class BulletGraphTest {
 		widget.addRange(10, 20, Color.AMBER);
 		widget.addRange(20, 30, Color.GREEN);
 		
-		String json = widget.toJson();
-		Assert.assertEquals("{\"data\":{\"item\":[{\"label\":\"test-label\",\"sublabel\":\"sub-test-label\",\"axis\":{\"point\":[1,2,3,4,8,0]},\"range\":[{\"color\":\"red\",\"start\":0,\"end\":10},{\"color\":\"amber\",\"start\":10,\"end\":20},{\"color\":\"green\",\"start\":20,\"end\":30}],\"measure\":{\"current\":{\"start\":1,\"end\":10},\"projected\":{\"start\":10,\"end\":100},\"comparative\":{\"point\":10}}}],\"orientation\":\"horizontal\"}}", json);
-		
 		ObjectMapper om = new ObjectMapper();
-		JsonNode node = om.readTree(json);
+		JsonNode node = om.readTree(widget.toJson());
 		JsonNode data = node.get("data");
 		JsonNode itemNode = data.get("item");
 		Assert.assertTrue(itemNode.isArray());
