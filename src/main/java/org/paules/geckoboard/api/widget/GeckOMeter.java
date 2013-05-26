@@ -1,43 +1,53 @@
 package org.paules.geckoboard.api.widget;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.type.GraphType;
 
 public class GeckOMeter extends Push {
-    private final boolean reverse;
+    private final  GraphType type;
 
-    private int           current;
+    private String           current;
 
     private Data          min;
 
     private Data          max;
 
-    public GeckOMeter( String widgetKey, boolean reverse ) {
+    public GeckOMeter( String widgetKey, GraphType type) {
         super( widgetKey );
-        this.reverse = reverse;
+        this.type = type;
+    }
+    
+    @Override
+    public String toJson() {
+        ObjectNode data = new ObjectMapper().getNodeFactory().objectNode();
+        getData( data );
+        return data.toString();
     }
 
     @Override
     protected void getData( ObjectNode node ) {
-        ObjectNode dataNode = node.objectNode();
-        node.put( "item", dataNode );
-        if ( reverse ) {
-            node.put( "item", "reverse" );
+        if ( type == GraphType.REVERSE ) {
+            node.put( "type", "reverse" );
         }
-        dataNode.put( "item", current );
-        dataNode.put( "min", min.toJson() );
-        dataNode.put( "max", max.toJson() );
+        else {
+            node.put( "type", "standard" );
+        }
+        node.put( "item", current );
+        node.put( "min", min.toJson() );
+        node.put( "max", max.toJson() );
     }
 
-    public void setCurrent( int current ) {
+    public void setCurrent( String current ) {
         this.current = current;
     }
 
-    public void setMax( Data max ) {
-        this.max = max;
+    public void setMax( String label, String value ) {
+        this.max = new Data(label, value);
     }
 
-    public void setMin( Data min ) {
-        this.min = min;
+    public void setMin( String label, String value ) {
+        this.min =  new Data(label, value);;
     }
 }

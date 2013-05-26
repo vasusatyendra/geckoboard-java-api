@@ -124,7 +124,7 @@ public abstract class Push {
         .concat( Integer.toHexString( color.getAlpha() ) );
     }
 
-    public final String toJson() {
+    public String toJson() {
         ObjectNode data = factory.objectNode();
         getData( data );
         node.put( "data", data );
