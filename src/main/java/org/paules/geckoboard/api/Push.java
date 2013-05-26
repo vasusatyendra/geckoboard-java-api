@@ -12,16 +12,42 @@ public abstract class Push {
     protected class Data {
         private final String label;
 
-        private final int    value;
+        private String strValue;
+        
+        private int intValue;
 
         private final String prefix;
 
         private final Color  color;
 
+        public Data( String label, String value ) {
+            super();
+            this.label = label;
+            this.strValue = value;
+            prefix = null;
+            color = null;
+        }
+
+        public Data( String label, String value, Color color ) {
+            super();
+            this.label = label;
+            this.strValue = value;
+            prefix = null;
+            this.color = color;
+        }
+
+        public Data( String label, String value, String prefix ) {
+            super();
+            this.label = label;
+            this.strValue = value;
+            this.prefix = prefix;
+            color = null;
+        }
+
         public Data( String label, int value ) {
             super();
             this.label = label;
-            this.value = value;
+            this.intValue = value;
             prefix = null;
             color = null;
         }
@@ -29,7 +55,7 @@ public abstract class Push {
         public Data( String label, int value, Color color ) {
             super();
             this.label = label;
-            this.value = value;
+            this.intValue = value;
             prefix = null;
             this.color = color;
         }
@@ -37,27 +63,20 @@ public abstract class Push {
         public Data( String label, int value, String prefix ) {
             super();
             this.label = label;
-            this.value = value;
+            this.intValue = value;
             this.prefix = prefix;
             color = null;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-
-        public String getPrefix() {
-            return prefix;
-        }
-
-        public int getValue() {
-            return value;
         }
 
         public ObjectNode toJson() {
             ObjectNode item = new ObjectMapper().getNodeFactory().objectNode();
             item.put( "label", label );
-            item.put( "value", value );
+            if (strValue != null) {
+            	item.put( "value", strValue );
+            }
+            else {
+            	item.put( "value", intValue );
+            }
             if ( prefix != null ) {
                 item.put( "prefix", prefix );
             }
