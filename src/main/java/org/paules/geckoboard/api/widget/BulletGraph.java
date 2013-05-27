@@ -8,6 +8,14 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 
+/**
+ * 
+ * @author Paul van Assen
+ * 
+ * Element for submitting data to the bullet graph
+ * http://www.geckoboard.com/developers/custom-widgets/widget-types/bullet-graph/
+ *
+ */
 public class BulletGraph extends Push {
 
     public enum Color {
