@@ -87,11 +87,11 @@ public abstract class Push {
         }
     }
 
-    private final ObjectNode      node;
+    private final ObjectNode        node;
 
-    private final JsonNodeFactory factory;
+    protected final JsonNodeFactory factory;
 
-    private final String          widgetKey;
+    private final String            widgetKey;
 
     protected Push( String widgetKey ) {
         factory = new ObjectMapper().getNodeFactory();
