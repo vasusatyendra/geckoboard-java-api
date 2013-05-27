@@ -8,35 +8,35 @@ import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.type.GraphType;
 
 public class FunnelGraph extends Push {
-	private final List<Data> data = new LinkedList<Data>();
+    private final List<Data> data = new LinkedList<Data>();
 
-	private final GraphType type;
+    private final GraphType  type;
 
-	private final boolean showPercentage;
+    private final boolean    showPercentage;
 
-	public FunnelGraph(String widgetKey, boolean showPercentage) {
-		this(widgetKey, GraphType.STANDARD, showPercentage);
-	}
+    public FunnelGraph( String widgetKey, boolean showPercentage ) {
+        this( widgetKey, GraphType.STANDARD, showPercentage );
+    }
 
-	public FunnelGraph(String widgetKey, GraphType type,
-			boolean showPercentage) {
-		super(widgetKey);
-		this.type = type;
-		this.showPercentage = showPercentage;
-	}
+    public FunnelGraph( String widgetKey, GraphType type, boolean showPercentage ) {
+        super( widgetKey );
+        this.type = type;
+        this.showPercentage = showPercentage;
+    }
 
-	public void addData(String label, String value) {
-		data.add(new Data(label, value));
-	}
+    public void addData( String label, String value ) {
+        data.add( new Data( label, value ) );
+    }
 
-	@Override
-	protected void getData(ObjectNode data) {
-		data.put("type", type.toString().toLowerCase());
-		if (showPercentage) {
-			data.put("percentage", "show");
-		} else {
-			data.put("percentage", "hide");
-		}
-		addData(data, this.data);
-	}
+    @Override
+    protected void getData( ObjectNode data ) {
+        data.put( "type", type.toString().toLowerCase() );
+        if ( showPercentage ) {
+            data.put( "percentage", "show" );
+        }
+        else {
+            data.put( "percentage", "hide" );
+        }
+        addData( data, this.data );
+    }
 }
