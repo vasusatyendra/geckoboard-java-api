@@ -7,6 +7,11 @@ import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.type.GraphType;
 
+/**
+ * @author Paul van Assen
+ *         Element for submiting data to the funnel graph
+ *         http://www.geckoboard.com/developers/custom-widgets/widget-types/funnel-graph/
+ */
 public class FunnelGraph extends Push {
     private final List<Data> data = new LinkedList<Data>();
 
