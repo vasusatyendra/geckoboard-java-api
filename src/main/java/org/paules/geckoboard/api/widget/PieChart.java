@@ -18,7 +18,12 @@ public class PieChart extends Push {
     public void addItem( String label, String value, Color color ) {
         items.add( new Data( label, value, color ) );
     }
-    
+
+    @Override
+    protected void getData( ObjectNode node ) {
+        addData( node, items );
+    }
+
     @Override
     public String toJson() {
         ObjectNode node = factory.objectNode();
@@ -26,12 +31,7 @@ public class PieChart extends Push {
         for ( Data dataEntry : this.items ) {
             items.add( dataEntry.toJson() );
         }
-        node.put("item", items);
+        node.put( "item", items );
         return node.toString();
-    }
-
-    @Override
-    protected void getData( ObjectNode node ) {
-        addData( node, items );
     }
 }

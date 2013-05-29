@@ -29,32 +29,6 @@ public class LineChart extends Push {
     }
 
     @Override
-    public String toJson() {
-        ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
-        ArrayNode itemNode = node.arrayNode();
-        for ( String item : items ) {
-            itemNode.add( item );
-        }
-        node.put( "item", itemNode );
-        ObjectNode settings = node.objectNode();
-        ArrayNode xAxis = settings.arrayNode();
-        settings.put( "xaxis", xAxis );
-        for ( String x : this.xAxis ) {
-            xAxis.add( x );
-        }
-        ArrayNode yAxis = settings.arrayNode();
-        settings.put( "yaxis", yAxis );
-        for ( String y : this.yAxis ) {
-            yAxis.add( y );
-        }
-        if ( color != null ) {
-            settings.put( "color", toHexString( color ) );
-        }
-        node.put( "settings", settings );
-        return node.toString();
-    }
-
-    @Override
     protected void getData( ObjectNode node ) {
 
     }
@@ -79,5 +53,31 @@ public class LineChart extends Push {
 
     public void setYAxisLabels( String[] labels ) {
         setYAxisLabels( Arrays.asList( labels ) );
+    }
+
+    @Override
+    public String toJson() {
+        ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
+        ArrayNode itemNode = node.arrayNode();
+        for ( String item : items ) {
+            itemNode.add( item );
+        }
+        node.put( "item", itemNode );
+        ObjectNode settings = node.objectNode();
+        ArrayNode xAxis = settings.arrayNode();
+        settings.put( "xaxis", xAxis );
+        for ( String x : this.xAxis ) {
+            xAxis.add( x );
+        }
+        ArrayNode yAxis = settings.arrayNode();
+        settings.put( "yaxis", yAxis );
+        for ( String y : this.yAxis ) {
+            yAxis.add( y );
+        }
+        if ( color != null ) {
+            settings.put( "color", toHexString( color ) );
+        }
+        node.put( "settings", settings );
+        return node.toString();
     }
 }

@@ -16,6 +16,10 @@ public class NumberAndSecondaryStat extends Push {
 
     private final String    prefix;
 
+    public NumberAndSecondaryStat( String widgetKey, boolean absolute, GraphType graphType ) {
+        this( widgetKey, absolute, graphType, null );
+    }
+
     public NumberAndSecondaryStat( String widgetKey, boolean absolute, GraphType graphType, String prefix ) {
         super( widgetKey );
         this.absolute = absolute;
@@ -23,8 +27,16 @@ public class NumberAndSecondaryStat extends Push {
         this.prefix = prefix;
     }
 
-    public NumberAndSecondaryStat( String widgetKey, boolean absolute, GraphType graphType ) {
-        this( widgetKey, absolute, graphType, null );
+    @Override
+    protected void getData( ObjectNode node ) {
+    }
+
+    public void setPrimary( int primary ) {
+        this.primary = primary;
+    }
+
+    public void setSecondary( Integer secondary ) {
+        this.secondary = secondary;
     }
 
     @Override
@@ -48,17 +60,5 @@ public class NumberAndSecondaryStat extends Push {
             items.add( item );
         }
         return data.toString();
-    }
-
-    @Override
-    protected void getData( ObjectNode node ) {
-    }
-
-    public void setPrimary( int primary ) {
-        this.primary = primary;
-    }
-
-    public void setSecondary( Integer secondary ) {
-        this.secondary = secondary;
     }
 }

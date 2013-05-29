@@ -5,6 +5,26 @@ import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 
 public class RAGNumbersOnly extends Push {
+    private static final class Item {
+        private final String text;
+
+        private final int    value;
+
+        public Item( String text, int value ) {
+            super();
+            this.text = text;
+            this.value = value;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
     private Item red;
 
     private Item amber;
@@ -15,12 +35,16 @@ public class RAGNumbersOnly extends Push {
         super( widgetKey );
     }
 
-    public void setGreen( String label, int value ) {
-        green = new Item( label, value );
+    @Override
+    protected void getData( ObjectNode data ) {
     }
 
     public void setAmber( String label, int value ) {
         amber = new Item( label, value );
+    }
+
+    public void setGreen( String label, int value ) {
+        green = new Item( label, value );
     }
 
     public void setRed( String label, int value ) {
@@ -48,29 +72,5 @@ public class RAGNumbersOnly extends Push {
         items.add( green );
 
         return data.toString();
-    }
-
-    @Override
-    protected void getData( ObjectNode data ) {
-    }
-
-    private static final class Item {
-        private final String text;
-
-        private final int    value;
-
-        public Item( String text, int value ) {
-            super();
-            this.text = text;
-            this.value = value;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public int getValue() {
-            return value;
-        }
     }
 }

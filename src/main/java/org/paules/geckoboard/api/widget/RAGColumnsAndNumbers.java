@@ -6,6 +6,40 @@ import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.type.GraphType;
 
 public class RAGColumnsAndNumbers extends Push {
+    private static final class Item {
+        private final String text;
+
+        private final int    value;
+
+        private final String prefix;
+
+        public Item( String text, int value ) {
+            super();
+            this.text = text;
+            this.value = value;
+            prefix = null;
+        }
+
+        public Item( String text, int value, String prefix ) {
+            super();
+            this.text = text;
+            this.value = value;
+            this.prefix = prefix;
+        }
+
+        public String getPrefix() {
+            return prefix;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
     private Item      red;
 
     private Item      amber;
@@ -19,24 +53,28 @@ public class RAGColumnsAndNumbers extends Push {
         this.graphType = graphType;
     }
 
-    public void setGreen( String label, int value ) {
-        green = new Item( label, value );
+    @Override
+    protected void getData( ObjectNode data ) {
     }
 
     public void setAmber( String label, int value ) {
         amber = new Item( label, value );
     }
 
-    public void setRed( String label, int value ) {
-        red = new Item( label, value );
+    public void setAmber( String label, int value, String prefix ) {
+        amber = new Item( label, value, prefix );
+    }
+
+    public void setGreen( String label, int value ) {
+        green = new Item( label, value );
     }
 
     public void setGreen( String label, int value, String prefix ) {
         green = new Item( label, value, prefix );
     }
 
-    public void setAmber( String label, int value, String prefix ) {
-        amber = new Item( label, value, prefix );
+    public void setRed( String label, int value ) {
+        red = new Item( label, value );
     }
 
     public void setRed( String label, int value, String prefix ) {
@@ -74,43 +112,5 @@ public class RAGColumnsAndNumbers extends Push {
         items.add( green );
 
         return data.toString();
-    }
-
-    @Override
-    protected void getData( ObjectNode data ) {
-    }
-
-    private static final class Item {
-        private final String text;
-
-        private final int    value;
-
-        private final String prefix;
-
-        public Item( String text, int value ) {
-            super();
-            this.text = text;
-            this.value = value;
-            this.prefix = null;
-        }
-
-        public Item( String text, int value, String prefix ) {
-            super();
-            this.text = text;
-            this.value = value;
-            this.prefix = prefix;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public String getPrefix() {
-            return prefix;
-        }
     }
 }
