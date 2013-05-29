@@ -9,7 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.junit.Assert;
 import org.junit.Test;
-import org.paules.geckoboard.api.widget.BulletGraph.Color;
+import org.paules.geckoboard.api.json.RAGColor;
 
 public class BulletGraphTest {
 
@@ -17,16 +17,16 @@ public class BulletGraphTest {
     public void testJson() throws JsonProcessingException, IOException {
         BulletGraph widget = new BulletGraph( "1234", false );
         widget.addItem();
-        widget.setAxisPoints( Arrays.asList( new Integer[] { 1, 2, 3, 4, 8, 0 } ) );
+        widget.setAxisPoints( Arrays.asList( new String[] { "1", "2", "3", "4", "8", "0" } ) );
 
-        widget.setComparative( 10 );
+        widget.setComparative( "10" );
         widget.setLabel( "test-label" );
         widget.setProjected( 10, 100 );
         widget.setSubLabel( "sub-test-label" );
         widget.setCurrent( 1, 10 );
-        widget.addRange( 0, 10, Color.RED );
-        widget.addRange( 10, 20, Color.AMBER );
-        widget.addRange( 20, 30, Color.GREEN );
+        widget.addRange( 0, 10, RAGColor.RED );
+        widget.addRange( 10, 20, RAGColor.AMBER );
+        widget.addRange( 20, 30, RAGColor.GREEN );
 
         ObjectMapper om = new ObjectMapper();
         JsonNode node = om.readTree( widget.toJson() );
