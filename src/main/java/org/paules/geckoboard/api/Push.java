@@ -118,7 +118,7 @@ public abstract class Push {
     }
 
     protected final String toHexString( Color color ) {
-        return String.format("%06X%02X", (0xFFFFFF & color.getRGB()), (0xFF&color.getAlpha()));
+        return String.format( "%06X%02X", ( 0xFFFFFF & color.getRGB() ), ( 0xFF & color.getAlpha() ) );
     }
 
     public String toJson() {
