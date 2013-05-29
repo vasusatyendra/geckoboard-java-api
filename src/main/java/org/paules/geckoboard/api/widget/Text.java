@@ -3,15 +3,16 @@ package org.paules.geckoboard.api.widget;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 
 public class Text extends Push {
     private static class TextItem {
-        private String text;
+        private final String text;
 
-        private Type   type;
+        private final Type   type;
 
         public TextItem( String text, Type type ) {
             super();
@@ -19,12 +20,12 @@ public class Text extends Push {
             this.type = type;
         }
 
-        public String getText() {
-            return text;
-        }
+        public ObjectNode toJson() {
+            ObjectNode item = new ObjectMapper().getNodeFactory().objectNode();
+            item.put( "text", text );
+            item.put( "type", type.jsonValue );
+            return item;
 
-        public Type getType() {
-            return type;
         }
     }
 
@@ -34,10 +35,6 @@ public class Text extends Push {
 
         private Type( int jsonValue ) {
             this.jsonValue = jsonValue;
-        }
-
-        public int getJsonValue() {
-            return jsonValue;
         }
     }
 
@@ -56,14 +53,17 @@ public class Text extends Push {
     }
 
     @Override
-    protected void getData( ObjectNode node ) {
-        ArrayNode itemsNode = node.arrayNode();
-        node.put( "item", itemsNode );
-        for ( TextItem item : text ) {
-            ObjectNode itemNode = itemsNode.objectNode();
-            itemNode.put( "text", item.getText() );
-            itemNode.put( "type", item.getType().jsonValue );
-            itemsNode.add( itemNode );
+    public String toJson() {
+        ObjectNode node = factory.objectNode();
+        ArrayNode items = node.arrayNode();
+        for ( TextItem dataEntry : this.text ) {
+            items.add( dataEntry.toJson() );
         }
+        node.put( "item", items );
+        return node.toString();
+    }
+
+    @Override
+    protected void getData( ObjectNode node ) {
     }
 }
