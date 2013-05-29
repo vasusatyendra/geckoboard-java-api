@@ -118,10 +118,7 @@ public abstract class Push {
     }
 
     protected final String toHexString( Color color ) {
-        return Integer.toHexString( color.getRed() ) //
-        .concat( Integer.toHexString( color.getGreen() ) ) //
-        .concat( Integer.toHexString( color.getBlue() ) ) //
-        .concat( Integer.toHexString( color.getAlpha() ) );
+        return String.format("%06X%02X", (0xFFFFFF & color.getRGB()), (0xFF&color.getAlpha()));
     }
 
     public String toJson() {
