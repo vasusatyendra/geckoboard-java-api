@@ -56,7 +56,7 @@ public class BulletGraphTest {
         Assert.assertEquals( 10, item.get( "measure" ).get( "current" ).get( "end" ).asInt() );
         Assert.assertEquals( 10, item.get( "measure" ).get( "projected" ).get( "start" ).asInt() );
         Assert.assertEquals( 100, item.get( "measure" ).get( "projected" ).get( "end" ).asInt() );
-        Assert.assertEquals( 10, item.get( "measure" ).get( "comparative" ).get( "point" ).asInt() );
+        Assert.assertEquals( 10, item.get( "comparative" ).get( "point" ).asInt() );
         Assert.assertEquals( "horizontal", node.get( "orientation" ).asText() );
 
     }
