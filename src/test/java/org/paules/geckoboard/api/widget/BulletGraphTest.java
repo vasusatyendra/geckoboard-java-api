@@ -30,8 +30,7 @@ public class BulletGraphTest {
 
         ObjectMapper om = new ObjectMapper();
         JsonNode node = om.readTree( widget.toJson() );
-        JsonNode data = node.get( "data" );
-        JsonNode itemNode = data.get( "item" );
+        JsonNode itemNode = node.get( "item" );
         Assert.assertTrue( itemNode.isArray() );
         ArrayNode items = ( ArrayNode ) itemNode;
         Assert.assertEquals( 1, items.size() );
@@ -58,7 +57,7 @@ public class BulletGraphTest {
         Assert.assertEquals( 10, item.get( "measure" ).get( "projected" ).get( "start" ).asInt() );
         Assert.assertEquals( 100, item.get( "measure" ).get( "projected" ).get( "end" ).asInt() );
         Assert.assertEquals( 10, item.get( "measure" ).get( "comparative" ).get( "point" ).asInt() );
-        Assert.assertEquals( "horizontal", data.get( "orientation" ).asText() );
+        Assert.assertEquals( "horizontal", node.get( "orientation" ).asText() );
 
     }
 
