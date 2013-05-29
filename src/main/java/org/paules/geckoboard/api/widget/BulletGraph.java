@@ -120,9 +120,10 @@ public class BulletGraph extends Push {
     public void addRange( int start, int end, RAGColor color ) {
         current.ranges.add( new Range( start, end, color ) );
     }
-
+    
     @Override
-    protected void getData( ObjectNode node ) {
+    public String toJson() {
+        ObjectNode node = factory.objectNode();
         ArrayNode itemsNode = node.arrayNode();
         for ( Item i : items ) {
             itemsNode.add( i.toJson() );
@@ -134,6 +135,11 @@ public class BulletGraph extends Push {
         else {
             node.put( "orientation", "horizontal" );
         }
+        return node.toString();
+    }
+
+    @Override
+    protected void getData( ObjectNode node ) {
     }
 
     public void setAxisPoints( List<String> points ) {
