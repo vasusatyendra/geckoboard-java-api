@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.json.RAGColor;
 
 /**
  * @author Paul van Assen
@@ -15,29 +16,20 @@ import org.paules.geckoboard.api.Push;
  */
 public class BulletGraph extends Push {
 
-    public enum Color {
-        RED( "red" ), AMBER( "amber" ), GREEN( "green" );
-        private final String json;
-
-        private Color( String json ) {
-            this.json = json;
-        }
-    }
-
     private static class Item {
-        private String        label;
+        private String       label;
 
-        private String        subLabel;
+        private String       subLabel;
 
-        private List<Integer> axisPoints = new LinkedList<Integer>();
+        private List<String> axisPoints = new LinkedList<String>();
 
-        private List<Range>   ranges     = new LinkedList<Range>();
+        private List<Range>  ranges     = new LinkedList<Range>();
 
-        private Position      current;
+        private Position     current;
 
-        private Position      projected;
+        private Position     projected;
 
-        private int           comparative;
+        private String       comparative;
 
         public ObjectNode toJson() {
             ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
@@ -49,7 +41,7 @@ public class BulletGraph extends Push {
             node.put( "axis", axis );
             ArrayNode point = axis.arrayNode();
             axis.put( "point", point );
-            for ( int pt : axisPoints ) {
+            for ( String pt : axisPoints ) {
                 point.add( pt );
             }
             ArrayNode range = node.arrayNode();
@@ -92,9 +84,9 @@ public class BulletGraph extends Push {
     }
 
     private static class Range extends Position {
-        private Color color;
+        private RAGColor color;
 
-        public Range( int start, int end, Color color ) {
+        public Range( int start, int end, RAGColor color ) {
             super( start, end );
             this.color = color;
         }
@@ -102,7 +94,7 @@ public class BulletGraph extends Push {
         @Override
         public ObjectNode toJson() {
             ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
-            node.put( "color", color.json );
+            node.put( "color", color.name().toLowerCase() );
             node.put( "start", start );
             node.put( "end", end );
             return node;
@@ -125,7 +117,7 @@ public class BulletGraph extends Push {
         items.add( current );
     }
 
-    public void addRange( int start, int end, Color color ) {
+    public void addRange( int start, int end, RAGColor color ) {
         current.ranges.add( new Range( start, end, color ) );
     }
 
@@ -144,11 +136,11 @@ public class BulletGraph extends Push {
         }
     }
 
-    public void setAxisPoints( List<Integer> points ) {
+    public void setAxisPoints( List<String> points ) {
         current.axisPoints.addAll( points );
     }
 
-    public void setComparative( int position ) {
+    public void setComparative( String position ) {
         current.comparative = position;
     }
 
