@@ -55,9 +55,9 @@ public class RAGNumbersOnly extends Push {
     }
 
     private static final class Item {
-        private String text;
+        private final String text;
 
-        private int    value;
+        private final int    value;
 
         public Item( String text, int value ) {
             super();
