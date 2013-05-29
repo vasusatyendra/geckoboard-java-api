@@ -59,7 +59,7 @@ public class BulletGraph extends Push {
             }
             ObjectNode comparativeNode = node.objectNode();
             comparativeNode.put( "point", comparative );
-            measure.put( "comparative", comparativeNode );
+            node.put( "comparative", comparativeNode );
             return node;
         }
     }
@@ -120,7 +120,7 @@ public class BulletGraph extends Push {
     public void addRange( int start, int end, RAGColor color ) {
         current.ranges.add( new Range( start, end, color ) );
     }
-    
+
     @Override
     public String toJson() {
         ObjectNode node = factory.objectNode();
