@@ -8,7 +8,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
-import org.paules.geckoboard.api.type.GraphType;
+import org.paules.geckoboard.api.json.GraphType;
 
 public class GeckOMeterTest {
 
@@ -23,9 +23,9 @@ public class GeckOMeterTest {
         JsonNode node = om.readTree( geckOMeter.toJson() );
         assertEquals( "10", node.get( "item" ).asText() );
         assertEquals( "0", node.get( "min" ).get( "value" ).asText() );
-        assertEquals( "No one", node.get( "min" ).get( "label" ).asText() );
+        assertEquals( "No one", node.get( "min" ).get( "text" ).asText() );
         assertEquals( "1000", node.get( "max" ).get( "value" ).asText() );
-        assertEquals( "Panic!", node.get( "max" ).get( "label" ).asText() );
+        assertEquals( "Panic!", node.get( "max" ).get( "text" ).asText() );
     }
 
 }

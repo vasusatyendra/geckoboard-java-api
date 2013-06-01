@@ -9,7 +9,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
-import org.paules.geckoboard.api.type.GraphType;
+import org.paules.geckoboard.api.json.GraphType;
 
 public class NumberAndSecondaryStatTest {
 
