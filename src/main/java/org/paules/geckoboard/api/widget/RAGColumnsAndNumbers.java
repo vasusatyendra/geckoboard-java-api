@@ -3,7 +3,7 @@ package org.paules.geckoboard.api.widget;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
-import org.paules.geckoboard.api.type.GraphType;
+import org.paules.geckoboard.api.json.GraphType;
 
 public class RAGColumnsAndNumbers extends Push {
     private static final class Item {

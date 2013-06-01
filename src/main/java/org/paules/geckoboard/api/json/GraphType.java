@@ -1,4 +1,4 @@
-package org.paules.geckoboard.api.type;
+package org.paules.geckoboard.api.json;
 
 public enum GraphType {
     /**

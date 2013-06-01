@@ -3,16 +3,17 @@ package org.paules.geckoboard.api.widget;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
-import org.paules.geckoboard.api.type.GraphType;
+import org.paules.geckoboard.api.json.GeckOData;
+import org.paules.geckoboard.api.json.GraphType;
 
 public class GeckOMeter extends Push {
     private final GraphType type;
 
     private String          current;
 
-    private Data            min;
+    private GeckOData            min;
 
-    private Data            max;
+    private GeckOData            max;
 
     public GeckOMeter( String widgetKey, GraphType type ) {
         super( widgetKey );
@@ -37,11 +38,11 @@ public class GeckOMeter extends Push {
     }
 
     public void setMax( String label, String value ) {
-        max = new Data( label, value );
+        max = new GeckOData( label, value );
     }
 
     public void setMin( String label, String value ) {
-        min = new Data( label, value );
+        min = new GeckOData( label, value );
     }
 
     @Override

@@ -65,17 +65,17 @@ public class LineChart extends Push {
         node.put( "item", itemNode );
         ObjectNode settings = node.objectNode();
         ArrayNode xAxis = settings.arrayNode();
-        settings.put( "xaxis", xAxis );
+        settings.put( "axisx", xAxis );
         for ( String x : this.xAxis ) {
             xAxis.add( x );
         }
         ArrayNode yAxis = settings.arrayNode();
-        settings.put( "yaxis", yAxis );
+        settings.put( "axisy", yAxis );
         for ( String y : this.yAxis ) {
             yAxis.add( y );
         }
         if ( color != null ) {
-            settings.put( "color", toHexString( color ) );
+            settings.put( "colour", toHexString( color ) );
         }
         node.put( "settings", settings );
         return node.toString();
