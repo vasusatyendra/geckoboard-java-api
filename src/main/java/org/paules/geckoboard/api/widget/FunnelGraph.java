@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
-import org.paules.geckoboard.api.type.GraphType;
+import org.paules.geckoboard.api.json.GraphType;
 
 /**
  * @author Paul van Assen
@@ -32,9 +32,10 @@ public class FunnelGraph extends Push {
     public void addData( String label, String value ) {
         data.add( new Data( label, value ) );
     }
-
+    
     @Override
-    protected void getData( ObjectNode data ) {
+    public String toJson() {
+        ObjectNode data = factory.objectNode();
         data.put( "type", type.toString().toLowerCase() );
         if ( showPercentage ) {
             data.put( "percentage", "show" );
@@ -43,5 +44,10 @@ public class FunnelGraph extends Push {
             data.put( "percentage", "hide" );
         }
         addData( data, this.data );
+        return data.toString();
+    }
+
+    @Override
+    protected void getData( ObjectNode data ) {
     }
 }
