@@ -1,6 +1,5 @@
 package org.paules.geckoboard.api.widget;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.json.GeckOData;
@@ -11,9 +10,9 @@ public class GeckOMeter extends Push {
 
     private String          current;
 
-    private GeckOData            min;
+    private GeckOData       min;
 
-    private GeckOData            max;
+    private GeckOData       max;
 
     public GeckOMeter( String widgetKey, GraphType type ) {
         super( widgetKey );
@@ -43,12 +42,5 @@ public class GeckOMeter extends Push {
 
     public void setMin( String label, String value ) {
         min = new GeckOData( label, value );
-    }
-
-    @Override
-    public String toJson() {
-        ObjectNode data = new ObjectMapper().getNodeFactory().objectNode();
-        getData( data );
-        return data.toString();
     }
 }

@@ -54,16 +54,10 @@ public class Text extends Push {
 
     @Override
     protected void getData( ObjectNode node ) {
-    }
-
-    @Override
-    public String toJson() {
-        ObjectNode node = factory.objectNode();
         ArrayNode items = node.arrayNode();
         for ( TextItem dataEntry : text ) {
             items.add( dataEntry.toJson() );
         }
         node.put( "item", items );
-        return node.toString();
     }
 }

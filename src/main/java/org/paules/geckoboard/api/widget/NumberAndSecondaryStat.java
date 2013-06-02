@@ -24,6 +24,23 @@ public class NumberAndSecondaryStat extends Push {
 
     @Override
     protected void getData( ObjectNode node ) {
+        node.put( "absolute", absolute );
+        node.put( "type", graphType.toString().toLowerCase() );
+        ArrayNode items = node.arrayNode();
+        node.put( "item", items );
+        ObjectNode item = node.objectNode();
+        item.put( "value", primary );
+        item.put( "text", "" );
+        items.add( item );
+        if ( prefix != null ) {
+            item.put( "prefix", prefix );
+        }
+        if ( secondary != null ) {
+            item = node.objectNode();
+            item.put( "value", secondary );
+            item.put( "text", "" );
+            items.add( item );
+        }
     }
 
     public void setPrimary( String primary, String prefix ) {
@@ -35,26 +52,4 @@ public class NumberAndSecondaryStat extends Push {
         this.secondary = secondary;
     }
 
-    @Override
-    public String toJson() {
-        ObjectNode data = factory.objectNode();
-        data.put( "absolute", absolute );
-        data.put( "type", graphType.toString().toLowerCase() );
-        ArrayNode items = data.arrayNode();
-        data.put( "item", items );
-        ObjectNode item = data.objectNode();
-        item.put( "value", primary );
-        item.put( "text", "" );
-        items.add( item );
-        if ( prefix != null ) {
-            item.put( "prefix", prefix );
-        }
-        if ( secondary != null ) {
-            item = data.objectNode();
-            item.put( "value", secondary );
-            item.put( "text", "" );
-            items.add( item );
-        }
-        return data.toString();
-    }
 }

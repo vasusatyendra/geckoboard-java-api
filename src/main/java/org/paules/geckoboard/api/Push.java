@@ -109,7 +109,7 @@ public abstract class Push {
 
     protected abstract void getData( ObjectNode node );
 
-    public String getWidgetKey() {
+    String getWidgetKey() {
         return widgetKey;
     }
 

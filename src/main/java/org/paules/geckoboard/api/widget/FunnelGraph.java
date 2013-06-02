@@ -32,10 +32,9 @@ public class FunnelGraph extends Push {
     public void addData( String label, String value ) {
         data.add( new Data( label, value ) );
     }
-    
+
     @Override
-    public String toJson() {
-        ObjectNode data = factory.objectNode();
+    protected void getData( ObjectNode data ) {
         data.put( "type", type.toString().toLowerCase() );
         if ( showPercentage ) {
             data.put( "percentage", "show" );
@@ -44,10 +43,5 @@ public class FunnelGraph extends Push {
             data.put( "percentage", "hide" );
         }
         addData( data, this.data );
-        return data.toString();
-    }
-
-    @Override
-    protected void getData( ObjectNode data ) {
     }
 }

@@ -8,20 +8,23 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class PieChartTest {
 
     @Test
     public void testJson() throws JsonProcessingException, IOException {
-        PieChart pieChart = new PieChart( "1234" );
-        pieChart.addItem( "Test1", "100", Color.RED );
-        pieChart.addItem( "Test2", "200", Color.GREEN );
-        pieChart.addItem( "Test3", "300", Color.BLUE );
-        pieChart.addItem( "Test4", "400", Color.WHITE );
+        PieChart widget = new PieChart( "1234" );
+        widget.addItem( "Test1", "100", Color.RED );
+        widget.addItem( "Test2", "200", Color.GREEN );
+        widget.addItem( "Test3", "300", Color.BLUE );
+        widget.addItem( "Test4", "400", Color.WHITE );
 
         ObjectMapper om = new ObjectMapper();
-        JsonNode node = om.readTree( pieChart.toJson() );
+        JsonNode data = om.readTree( widget.toJson() );
+        Assert.assertNotNull( data.get( "data" ) );
+        JsonNode node = data.get( "data" );
         assertEquals( 4, node.get( "item" ).size() );
         assertEquals( "Test1", node.get( "item" ).get( 0 ).get( "label" ).asText() );
         assertEquals( "100", node.get( "item" ).get( 0 ).get( "value" ).asText() );

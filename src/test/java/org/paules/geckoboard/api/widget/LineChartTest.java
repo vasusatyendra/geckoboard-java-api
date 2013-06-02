@@ -10,23 +10,26 @@ import java.util.Arrays;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class LineChartTest {
 
     @Test
     public void testJson() throws JsonProcessingException, IOException {
-        LineChart lineChart = new LineChart( "123" );
-        lineChart.addDataPoint( "1.2" );
-        lineChart.addDataPoint( "2.0" );
-        lineChart.addDataPoint( "4" );
-        lineChart.addDataPoint( "0.4" );
-        lineChart.setColor( Color.RED );
-        lineChart.setXAxisLabels( Arrays.asList( new String[] { "Jan", "Feb", "Mar", "Apr" } ) );
-        lineChart.setYAxisLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
+        LineChart widget = new LineChart( "1234" );
+        widget.addDataPoint( "1.2" );
+        widget.addDataPoint( "2.0" );
+        widget.addDataPoint( "4" );
+        widget.addDataPoint( "0.4" );
+        widget.setColor( Color.RED );
+        widget.setXAxisLabels( Arrays.asList( new String[] { "Jan", "Feb", "Mar", "Apr" } ) );
+        widget.setYAxisLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
 
         ObjectMapper om = new ObjectMapper();
-        JsonNode node = om.readTree( lineChart.toJson() );
+        JsonNode data = om.readTree( widget.toJson() );
+        Assert.assertNotNull( data.get( "data" ) );
+        JsonNode node = data.get( "data" );
         assertTrue( node.get( "item" ).isArray() );
         assertEquals( 4, node.get( "item" ).size() );
         assertEquals( "1.2", node.get( "item" ).get( 0 ).asText() );

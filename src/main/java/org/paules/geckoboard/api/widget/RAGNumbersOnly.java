@@ -37,23 +37,6 @@ public class RAGNumbersOnly extends Push {
 
     @Override
     protected void getData( ObjectNode data ) {
-    }
-
-    public void setAmber( String label, int value ) {
-        amber = new Item( label, value );
-    }
-
-    public void setGreen( String label, int value ) {
-        green = new Item( label, value );
-    }
-
-    public void setRed( String label, int value ) {
-        red = new Item( label, value );
-    }
-
-    @Override
-    public String toJson() {
-        ObjectNode data = factory.objectNode();
         ArrayNode items = data.arrayNode();
         data.put( "item", items );
         ObjectNode red = data.objectNode();
@@ -70,7 +53,17 @@ public class RAGNumbersOnly extends Push {
         green.put( "value", this.green.getValue() );
         green.put( "text", this.green.getText() );
         items.add( green );
+    }
 
-        return data.toString();
+    public void setAmber( String label, int value ) {
+        amber = new Item( label, value );
+    }
+
+    public void setGreen( String label, int value ) {
+        green = new Item( label, value );
+    }
+
+    public void setRed( String label, int value ) {
+        red = new Item( label, value );
     }
 }

@@ -16,7 +16,6 @@ public class BulletGraphTest {
     @Test
     public void testJson() throws JsonProcessingException, IOException {
         BulletGraph widget = new BulletGraph( "1234", false );
-        widget.addNewGraph();
         widget.setAxisPoints( Arrays.asList( new String[] { "1", "2", "3", "4", "8", "0" } ) );
 
         widget.setComparative( "10" );
@@ -29,7 +28,9 @@ public class BulletGraphTest {
         widget.addRange( 20, 30, RAGColor.GREEN );
 
         ObjectMapper om = new ObjectMapper();
-        JsonNode node = om.readTree( widget.toJson() );
+        JsonNode data = om.readTree( widget.toJson() );
+        Assert.assertNotNull( data.get( "data" ) );
+        JsonNode node = data.get( "data" );
         JsonNode itemNode = node.get( "item" );
         Assert.assertTrue( itemNode.isArray() );
         ArrayNode items = ( ArrayNode ) itemNode;
