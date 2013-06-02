@@ -10,7 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Connector {
+public class Geckoboard {
     private final Logger        logger               = LoggerFactory.getLogger( getClass() );
 
     private static final int    RECOMMENDED_TIME_OUT = 70000;
@@ -29,7 +29,7 @@ public class Connector {
 
     private final String apiKey;
 
-    public Connector( String apiKey ) {
+    public Geckoboard( String apiKey ) {
         this.apiKey = apiKey;
     }
 
