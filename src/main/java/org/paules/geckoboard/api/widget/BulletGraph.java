@@ -110,9 +110,10 @@ public class BulletGraph extends Push {
     public BulletGraph( String widgetKey, boolean vertical ) {
         super( widgetKey );
         this.vertical = vertical;
+        addNewGraph();
     }
 
-    public void addItem() {
+    public void addNewGraph() {
         current = new Item();
         items.add( current );
     }

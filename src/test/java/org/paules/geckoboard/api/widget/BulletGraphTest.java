@@ -16,7 +16,7 @@ public class BulletGraphTest {
     @Test
     public void testJson() throws JsonProcessingException, IOException {
         BulletGraph widget = new BulletGraph( "1234", false );
-        widget.addItem();
+        widget.addNewGraph();
         widget.setAxisPoints( Arrays.asList( new String[] { "1", "2", "3", "4", "8", "0" } ) );
 
         widget.setComparative( "10" );
