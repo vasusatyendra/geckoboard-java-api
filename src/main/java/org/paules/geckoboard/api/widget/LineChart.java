@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
@@ -29,8 +28,27 @@ public class LineChart extends Push {
     }
 
     @Override
-    protected void getData( ObjectNode node ) {
-
+    protected void getData( ObjectNode data ) {
+        ArrayNode itemNode = data.arrayNode();
+        for ( String item : items ) {
+            itemNode.add( item );
+        }
+        data.put( "item", itemNode );
+        ObjectNode settings = data.objectNode();
+        ArrayNode xAxis = settings.arrayNode();
+        settings.put( "axisx", xAxis );
+        for ( String x : this.xAxis ) {
+            xAxis.add( x );
+        }
+        ArrayNode yAxis = settings.arrayNode();
+        settings.put( "axisy", yAxis );
+        for ( String y : this.yAxis ) {
+            yAxis.add( y );
+        }
+        if ( color != null ) {
+            settings.put( "colour", toHexString( color ) );
+        }
+        data.put( "settings", settings );
     }
 
     public void setColor( Color color ) {
@@ -53,31 +71,5 @@ public class LineChart extends Push {
 
     public void setYAxisLabels( String[] labels ) {
         setYAxisLabels( Arrays.asList( labels ) );
-    }
-
-    @Override
-    public String toJson() {
-        ObjectNode node = new ObjectMapper().getNodeFactory().objectNode();
-        ArrayNode itemNode = node.arrayNode();
-        for ( String item : items ) {
-            itemNode.add( item );
-        }
-        node.put( "item", itemNode );
-        ObjectNode settings = node.objectNode();
-        ArrayNode xAxis = settings.arrayNode();
-        settings.put( "axisx", xAxis );
-        for ( String x : this.xAxis ) {
-            xAxis.add( x );
-        }
-        ArrayNode yAxis = settings.arrayNode();
-        settings.put( "axisy", yAxis );
-        for ( String y : this.yAxis ) {
-            yAxis.add( y );
-        }
-        if ( color != null ) {
-            settings.put( "colour", toHexString( color ) );
-        }
-        node.put( "settings", settings );
-        return node.toString();
     }
 }

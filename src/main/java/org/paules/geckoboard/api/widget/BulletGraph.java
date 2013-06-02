@@ -123,8 +123,7 @@ public class BulletGraph extends Push {
     }
 
     @Override
-    public String toJson() {
-        ObjectNode node = factory.objectNode();
+    protected void getData( ObjectNode node ) {
         ArrayNode itemsNode = node.arrayNode();
         for ( Item i : items ) {
             itemsNode.add( i.toJson() );
@@ -136,11 +135,6 @@ public class BulletGraph extends Push {
         else {
             node.put( "orientation", "horizontal" );
         }
-        return node.toString();
-    }
-
-    @Override
-    protected void getData( ObjectNode node ) {
     }
 
     public void setAxisPoints( List<String> points ) {

@@ -7,19 +7,22 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class RAGNumbersOnlyTest {
 
     @Test
     public void testJson() throws JsonProcessingException, IOException {
-        RAGNumbersOnly ragNumbersOnly = new RAGNumbersOnly( "1234" );
-        ragNumbersOnly.setRed( "Test-red", 123 );
-        ragNumbersOnly.setAmber( "Test-amber", 1234 );
-        ragNumbersOnly.setGreen( "Test-green", 12345 );
+        RAGNumbersOnly widget = new RAGNumbersOnly( "1234" );
+        widget.setRed( "Test-red", 123 );
+        widget.setAmber( "Test-amber", 1234 );
+        widget.setGreen( "Test-green", 12345 );
 
         ObjectMapper om = new ObjectMapper();
-        JsonNode node = om.readTree( ragNumbersOnly.toJson() );
+        JsonNode data = om.readTree( widget.toJson() );
+        Assert.assertNotNull( data.get( "data" ) );
+        JsonNode node = data.get( "data" );
 
         assertEquals( 3, node.get( "item" ).size() );
         assertEquals( "Test-red", node.get( "item" ).get( 0 ).get( "text" ).asText() );

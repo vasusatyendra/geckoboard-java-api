@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.paules.geckoboard.api.json.GraphType;
 
@@ -22,7 +23,9 @@ public class FunnelGraphTest {
         widget.addData( "Step 5", "10 mega" );
 
         ObjectMapper om = new ObjectMapper();
-        JsonNode node = om.readTree( widget.toJson() );
+        JsonNode data = om.readTree( widget.toJson() );
+        Assert.assertNotNull( data.get( "data" ) );
+        JsonNode node = data.get( "data" );
         assertEquals( "standard", node.get( "type" ).asText() );
         assertEquals( "hide", node.get( "percentage" ).asText() );
 

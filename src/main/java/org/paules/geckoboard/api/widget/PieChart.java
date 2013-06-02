@@ -21,17 +21,10 @@ public class PieChart extends Push {
 
     @Override
     protected void getData( ObjectNode node ) {
-        addData( node, items );
-    }
-
-    @Override
-    public String toJson() {
-        ObjectNode node = factory.objectNode();
         ArrayNode items = node.arrayNode();
         for ( Data dataEntry : this.items ) {
             items.add( dataEntry.toJson() );
         }
         node.put( "item", items );
-        return node.toString();
     }
 }

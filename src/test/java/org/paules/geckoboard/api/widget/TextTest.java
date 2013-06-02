@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.paules.geckoboard.api.widget.Text.Type;
 
@@ -14,14 +15,16 @@ public class TextTest {
 
     @Test
     public void testJson() throws JsonProcessingException, IOException {
-        Text text = new Text( "1234" );
-        text.addText( "Test1" );
-        text.addText( "Test2", Type.ALERT );
-        text.addText( "Test3", Type.INFO );
-        text.addText( "Test4", Type.NONE );
+        Text widget = new Text( "1234" );
+        widget.addText( "Test1" );
+        widget.addText( "Test2", Type.ALERT );
+        widget.addText( "Test3", Type.INFO );
+        widget.addText( "Test4", Type.NONE );
 
         ObjectMapper om = new ObjectMapper();
-        JsonNode node = om.readTree( text.toJson() );
+        JsonNode data = om.readTree( widget.toJson() );
+        Assert.assertNotNull( data.get( "data" ) );
+        JsonNode node = data.get( "data" );
 
         assertEquals( 4, node.get( "item" ).size() );
 

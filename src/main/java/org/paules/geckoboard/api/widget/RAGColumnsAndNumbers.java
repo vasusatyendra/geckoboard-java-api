@@ -55,35 +55,6 @@ public class RAGColumnsAndNumbers extends Push {
 
     @Override
     protected void getData( ObjectNode data ) {
-    }
-
-    public void setAmber( String label, int value ) {
-        amber = new Item( label, value );
-    }
-
-    public void setAmber( String label, int value, String prefix ) {
-        amber = new Item( label, value, prefix );
-    }
-
-    public void setGreen( String label, int value ) {
-        green = new Item( label, value );
-    }
-
-    public void setGreen( String label, int value, String prefix ) {
-        green = new Item( label, value, prefix );
-    }
-
-    public void setRed( String label, int value ) {
-        red = new Item( label, value );
-    }
-
-    public void setRed( String label, int value, String prefix ) {
-        red = new Item( label, value, prefix );
-    }
-
-    @Override
-    public String toJson() {
-        ObjectNode data = factory.objectNode();
         data.put( "type", graphType.toString().toLowerCase() );
         ArrayNode items = data.arrayNode();
         data.put( "item", items );
@@ -110,7 +81,29 @@ public class RAGColumnsAndNumbers extends Push {
             green.put( "prefix", this.green.getPrefix() );
         }
         items.add( green );
+    }
 
-        return data.toString();
+    public void setAmber( String label, int value ) {
+        amber = new Item( label, value );
+    }
+
+    public void setAmber( String label, int value, String prefix ) {
+        amber = new Item( label, value, prefix );
+    }
+
+    public void setGreen( String label, int value ) {
+        green = new Item( label, value );
+    }
+
+    public void setGreen( String label, int value, String prefix ) {
+        green = new Item( label, value, prefix );
+    }
+
+    public void setRed( String label, int value ) {
+        red = new Item( label, value );
+    }
+
+    public void setRed( String label, int value, String prefix ) {
+        red = new Item( label, value, prefix );
     }
 }

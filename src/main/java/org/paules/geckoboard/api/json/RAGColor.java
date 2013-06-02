@@ -6,16 +6,16 @@ public enum RAGColor {
     /**
      * Red color
      */
-    @SerializedName("red")
-    RED, 
+    @SerializedName( "red" )
+    RED,
     /**
      * Amber color
      */
-    @SerializedName("amber")
-    AMBER, 
+    @SerializedName( "amber" )
+    AMBER,
     /**
      * Green color
      */
-    @SerializedName("green")
+    @SerializedName( "green" )
     GREEN;
 }
