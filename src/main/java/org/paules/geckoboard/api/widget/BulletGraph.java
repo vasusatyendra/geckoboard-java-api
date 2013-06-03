@@ -19,7 +19,7 @@ public class BulletGraph extends Push {
     private static class Item {
         private String       label;
 
-        private String       subLabel;
+        private String       subLabel = "";
 
         private List<String> axisPoints = new LinkedList<String>();
 
@@ -124,11 +124,9 @@ public class BulletGraph extends Push {
 
     @Override
     protected void getData( ObjectNode node ) {
-        ArrayNode itemsNode = node.arrayNode();
         for ( Item i : items ) {
-            itemsNode.add( i.toJson() );
+            node.put("item", i.toJson() );
         }
-        node.put( "item", itemsNode );
         if ( vertical ) {
             node.put( "orientation", "vertial" );
         }
