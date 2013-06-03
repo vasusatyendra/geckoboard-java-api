@@ -3,8 +3,11 @@ package org.paules.geckoboard.api.widget;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
+import org.paules.geckoboard.api.json.FunnelGraphData;
 import org.paules.geckoboard.api.json.GraphType;
 
 /**
@@ -13,11 +16,11 @@ import org.paules.geckoboard.api.json.GraphType;
  *         http://www.geckoboard.com/developers/custom-widgets/widget-types/funnel-graph/
  */
 public class FunnelGraph extends Push {
-    private final List<Data> data = new LinkedList<Data>();
+    private final List<FunnelGraphData> data = new LinkedList<FunnelGraphData>();
 
-    private final GraphType  type;
+    private final GraphType             type;
 
-    private final boolean    showPercentage;
+    private final boolean               showPercentage;
 
     public FunnelGraph( String widgetKey, boolean showPercentage ) {
         this( widgetKey, GraphType.STANDARD, showPercentage );
@@ -30,7 +33,14 @@ public class FunnelGraph extends Push {
     }
 
     public void addData( String label, String value ) {
-        data.add( new Data( label, value ) );
+        data.add( new FunnelGraphData( label, value ) );
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
+        if ( data.size() == 0 ) {
+            throw new ValidationException( "item", "Items cannot be empty" );
+        }
     }
 
     @Override
@@ -42,6 +52,10 @@ public class FunnelGraph extends Push {
         else {
             data.put( "percentage", "hide" );
         }
-        addData( data, this.data );
+        ArrayNode items = data.arrayNode();
+        data.put( "item", items );
+        for ( FunnelGraphData dataEntry : this.data ) {
+            items.add( dataEntry.toJson() );
+        }
     }
 }

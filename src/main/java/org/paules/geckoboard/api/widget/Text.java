@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
 
 public class Text extends Push {
     private static class TextItem {
@@ -50,6 +51,10 @@ public class Text extends Push {
 
     public void addText( String text, Type type ) {
         this.text.add( new TextItem( text, type ) );
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
     }
 
     @Override
