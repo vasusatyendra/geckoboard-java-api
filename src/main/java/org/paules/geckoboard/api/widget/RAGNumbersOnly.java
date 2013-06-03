@@ -3,6 +3,7 @@ package org.paules.geckoboard.api.widget;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
 
 public class RAGNumbersOnly extends Push {
     private static final class Item {
@@ -33,6 +34,10 @@ public class RAGNumbersOnly extends Push {
 
     public RAGNumbersOnly( String widgetKey ) {
         super( widgetKey );
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
     }
 
     @Override

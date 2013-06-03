@@ -2,6 +2,7 @@ package org.paules.geckoboard.api.widget;
 
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
 import org.paules.geckoboard.api.json.GeckOData;
 import org.paules.geckoboard.api.json.GraphType;
 
@@ -17,6 +18,10 @@ public class GeckOMeter extends Push {
     public GeckOMeter( String widgetKey, GraphType type ) {
         super( widgetKey );
         this.type = type;
+    }
+    
+    @Override
+    protected void validate() throws ValidationException {
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.List;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
 
 public class LineChart extends Push {
     private final List<String> items = new LinkedList<String>();
@@ -26,6 +27,20 @@ public class LineChart extends Push {
     public void addDataPoint( String dataPoint ) {
         items.add( dataPoint );
     }
+    
+    @Override
+    protected void validate() throws ValidationException {
+        if (items.size() == 0) {
+            throw new ValidationException( "item", "Must be filled" );
+        }
+        if (xAxis.size() == 0) {
+            throw new ValidationException( "axisx", "Must be filled" );
+        }
+        if (yAxis.size() == 0) {
+            throw new ValidationException( "axisy", "Must be filled" );
+        }
+    }
+
 
     @Override
     protected void getData( ObjectNode data ) {

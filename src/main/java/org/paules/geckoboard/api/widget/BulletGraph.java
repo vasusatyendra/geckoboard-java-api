@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
 import org.paules.geckoboard.api.json.RAGColor;
 
 /**
@@ -120,6 +121,13 @@ public class BulletGraph extends Push {
 
     public void addRange( int start, int end, RAGColor color ) {
         current.ranges.add( new Range( start, end, color ) );
+    }
+    
+    @Override
+    protected void validate() throws ValidationException {
+        if (current.subLabel == null) {
+            throw new ValidationException("sublabel", "Field may not be empty");
+        }
     }
 
     @Override

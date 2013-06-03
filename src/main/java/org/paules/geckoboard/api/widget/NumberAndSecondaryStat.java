@@ -3,6 +3,7 @@ package org.paules.geckoboard.api.widget;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
+import org.paules.geckoboard.api.error.ValidationException;
 import org.paules.geckoboard.api.json.GraphType;
 
 public class NumberAndSecondaryStat extends Push {
@@ -20,6 +21,13 @@ public class NumberAndSecondaryStat extends Push {
         super( widgetKey );
         this.absolute = absolute;
         this.graphType = graphType;
+    }
+    
+    @Override
+    protected void validate() throws ValidationException {
+        if (primary == null || primary.isEmpty()) {
+            throw new ValidationException( "primary", "cannot be empty" );
+        }
     }
 
     @Override
