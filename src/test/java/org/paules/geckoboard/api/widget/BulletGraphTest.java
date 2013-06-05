@@ -31,11 +31,7 @@ public class BulletGraphTest {
         JsonNode data = om.readTree( widget.toJson() );
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
-        JsonNode itemNode = node.get( "item" );
-        Assert.assertTrue( itemNode.isArray() );
-        ArrayNode items = ( ArrayNode ) itemNode;
-        Assert.assertEquals( 1, items.size() );
-        JsonNode item = items.get( 0 );
+        JsonNode item = node.get( "item" );
         Assert.assertEquals( "test-label", item.get( "label" ).asText() );
         Assert.assertEquals( "sub-test-label", item.get( "sublabel" ).asText() );
         Assert.assertTrue( item.get( "axis" ).get( "point" ).isArray() );
