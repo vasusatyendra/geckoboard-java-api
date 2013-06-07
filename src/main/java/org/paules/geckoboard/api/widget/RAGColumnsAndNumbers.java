@@ -53,7 +53,7 @@ public class RAGColumnsAndNumbers extends Push {
         super( widgetKey );
         this.graphType = graphType;
     }
-    
+
     @Override
     protected void validate() throws ValidationException {
     }
@@ -63,13 +63,14 @@ public class RAGColumnsAndNumbers extends Push {
         data.put( "type", graphType.toString().toLowerCase() );
         ArrayNode items = data.arrayNode();
         data.put( "item", items );
-        ObjectNode red = data.objectNode();
-        red.put( "value", this.red.getValue() );
-        red.put( "text", this.red.getText() );
-        if ( this.red.getPrefix() != null ) {
-            red.put( "prefix", this.red.getPrefix() );
+
+        ObjectNode green = data.objectNode();
+        green.put( "value", this.green.getValue() );
+        green.put( "text", this.green.getText() );
+        if ( this.green.getPrefix() != null ) {
+            green.put( "prefix", this.green.getPrefix() );
         }
-        items.add( red );
+        items.add( green );
 
         ObjectNode amber = data.objectNode();
         amber.put( "value", this.amber.getValue() );
@@ -79,13 +80,13 @@ public class RAGColumnsAndNumbers extends Push {
         }
         items.add( amber );
 
-        ObjectNode green = data.objectNode();
-        green.put( "value", this.green.getValue() );
-        green.put( "text", this.green.getText() );
-        if ( this.green.getPrefix() != null ) {
-            green.put( "prefix", this.green.getPrefix() );
+        ObjectNode red = data.objectNode();
+        red.put( "value", this.red.getValue() );
+        red.put( "text", this.red.getText() );
+        if ( this.red.getPrefix() != null ) {
+            red.put( "prefix", this.red.getPrefix() );
         }
-        items.add( green );
+        items.add( red );
     }
 
     public void setAmber( String label, int value ) {
