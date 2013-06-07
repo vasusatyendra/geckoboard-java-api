@@ -1,7 +1,5 @@
 package org.paules.geckoboard.api;
 
-import java.awt.Color;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
