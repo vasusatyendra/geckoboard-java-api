@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
-import org.paules.geckoboard.api.Push;
 
 public class PieChartData {
     private final String label;
