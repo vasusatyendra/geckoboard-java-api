@@ -29,17 +29,18 @@ public class RAGColumnsAndNumbersTest {
         assertEquals( "standard", node.get( "type" ).asText() );
 
         assertEquals( 3, node.get( "item" ).size() );
-        assertEquals( "Test-red", node.get( "item" ).get( 0 ).get( "text" ).asText() );
-        assertEquals( 123, node.get( "item" ).get( 0 ).get( "value" ).asInt() );
-        assertNull( node.get( "item" ).get( 0 ).get( "prefix" ) );
+
+        assertEquals( "Test-green", node.get( "item" ).get( 0 ).get( "text" ).asText() );
+        assertEquals( 12345, node.get( "item" ).get( 0 ).get( "value" ).asInt() );
+        assertEquals( "$", node.get( "item" ).get( 0 ).get( "prefix" ).asText() );
 
         assertEquals( "Test-amber", node.get( "item" ).get( 1 ).get( "text" ).asText() );
         assertEquals( 1234, node.get( "item" ).get( 1 ).get( "value" ).asInt() );
         assertNull( node.get( "item" ).get( 1 ).get( "prefix" ) );
 
-        assertEquals( "Test-green", node.get( "item" ).get( 2 ).get( "text" ).asText() );
-        assertEquals( 12345, node.get( "item" ).get( 2 ).get( "value" ).asInt() );
-        assertEquals( "$", node.get( "item" ).get( 2 ).get( "prefix" ).asText() );
+        assertEquals( "Test-red", node.get( "item" ).get( 2 ).get( "text" ).asText() );
+        assertEquals( 123, node.get( "item" ).get( 2 ).get( "value" ).asInt() );
+        assertNull( node.get( "item" ).get( 2 ).get( "prefix" ) );
     }
 
 }
