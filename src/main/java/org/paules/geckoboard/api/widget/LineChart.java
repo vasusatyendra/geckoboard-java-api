@@ -10,6 +10,7 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
+import org.paules.geckoboard.api.json.ColorUtil;
 
 public class LineChart extends Push {
     private final List<String> items = new LinkedList<String>();
@@ -61,7 +62,7 @@ public class LineChart extends Push {
             yAxis.add( y );
         }
         if ( color != null ) {
-            settings.put( "colour", toHexString( color ) );
+            settings.put( "colour", ColorUtil.toHexString( color ) );
         }
         data.put( "settings", settings );
     }

@@ -39,10 +39,6 @@ public abstract class Push {
         node.put( "api_key", apiKey );
     }
 
-    public static final String toHexString( Color color ) {
-        return String.format( "%06X%02X", ( 0xFFFFFF & color.getRGB() ), ( 0xFF & color.getAlpha() ) );
-    }
-
     public String toJson() {
         if (!disableValidation) {
             validate();
