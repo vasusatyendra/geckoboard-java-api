@@ -25,7 +25,7 @@ public class PieChartData {
         item.put( "label", label );
         item.put( "value", strValue );
         if ( color != null ) {
-            item.put( "color", Push.toHexString( color ) );
+            item.put( "color", ColorUtil.toHexString( color ) );
         }
         return item;
     }
