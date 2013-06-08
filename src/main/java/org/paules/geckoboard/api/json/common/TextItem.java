@@ -1,24 +1,24 @@
-package org.paules.geckoboard.api.json;
+package org.paules.geckoboard.api.json.common;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 
-public class GeckOData {
+public class TextItem {
     private final String text;
 
-    private String       strValue;
+    private final TextItemType   type;
 
-    public GeckOData( String text, String value ) {
+    public TextItem( String text, TextItemType type ) {
         super();
         this.text = text;
-        strValue = value;
+        this.type = type;
     }
 
     public ObjectNode toJson() {
         ObjectNode item = new ObjectMapper().getNodeFactory().objectNode();
         item.put( "text", text );
-        item.put( "value", strValue );
+        item.put( "type", type.jsonValue );
         return item;
-    }
 
+    }
 }

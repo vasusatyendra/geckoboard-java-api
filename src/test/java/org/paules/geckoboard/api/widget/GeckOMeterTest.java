@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
-import org.paules.geckoboard.api.json.GraphType;
+import org.paules.geckoboard.api.json.common.GraphType;
+import org.paules.geckoboard.helper.JsonTestHelper;
 
 public class GeckOMeterTest {
 
@@ -20,8 +20,8 @@ public class GeckOMeterTest {
         widget.setMin( "No one", "0" );
         widget.setMax( "Panic!", "1000" );
 
-        ObjectMapper om = new ObjectMapper();
-        JsonNode data = om.readTree( widget.toJson() );
+        JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
+
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
         assertEquals( "10", node.get( "item" ).asText() );

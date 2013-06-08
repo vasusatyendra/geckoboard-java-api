@@ -1,50 +1,18 @@
 package org.paules.geckoboard.api;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.JsonNodeFactory;
-import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.error.ValidationException;
 
 public abstract class Push {
-    private final boolean disableValidation;
-    
-    private final ObjectNode        node;
+    private final String widgetKey;
 
-    protected final JsonNodeFactory factory;
-
-    private final String            widgetKey;
-    
     protected Push( String widgetKey ) {
-        this(widgetKey, false);
-    }
-
-    protected Push( String widgetKey, boolean disableValidation ) {
-        factory = new ObjectMapper().getNodeFactory();
-        node = factory.objectNode();
         this.widgetKey = widgetKey;
-        this.disableValidation = disableValidation;
     }
 
-    protected abstract void getData( ObjectNode node );
-    
     protected abstract void validate() throws ValidationException;
 
     String getWidgetKey() {
         return widgetKey;
-    }
-
-    void setApiKey( String apiKey ) {
-        node.put( "api_key", apiKey );
-    }
-
-    public String toJson() {
-        if (!disableValidation) {
-            validate();
-        }
-        ObjectNode data = factory.objectNode();
-        getData( data );
-        node.put( "data", data );
-        return node.toString();
     }
 
 }

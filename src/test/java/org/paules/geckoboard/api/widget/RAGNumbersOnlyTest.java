@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
+import org.paules.geckoboard.helper.JsonTestHelper;
 
 public class RAGNumbersOnlyTest {
 
@@ -19,8 +19,7 @@ public class RAGNumbersOnlyTest {
         widget.setAmber( "Test-amber", 1234 );
         widget.setGreen( "Test-green", 12345 );
 
-        ObjectMapper om = new ObjectMapper();
-        JsonNode data = om.readTree( widget.toJson() );
+        JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
 
