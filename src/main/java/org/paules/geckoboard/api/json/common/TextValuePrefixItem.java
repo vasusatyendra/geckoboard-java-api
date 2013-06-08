@@ -1,0 +1,15 @@
+package org.paules.geckoboard.api.json.common;
+
+public class TextValuePrefixItem extends TextValueItem {
+
+    private final String prefix;
+
+    public TextValuePrefixItem( String text, int value, String prefix ) {
+        super(text, value);
+        this.prefix = prefix;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+}

@@ -7,8 +7,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
+import org.paules.geckoboard.api.gson.GsonFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
 
 public class Geckoboard {
     private final Logger        logger               = LoggerFactory.getLogger( getClass() );
@@ -45,14 +48,15 @@ public class Geckoboard {
     }
 
     public void push( Push push ) throws IOException {
-        push.setApiKey( apiKey );
+        WidgetWrapper wrapper = new WidgetWrapper( push, apiKey );
+        Gson gson = GsonFactory.getGson();
+        String json = gson.toJson( wrapper );
         HttpURLConnection connection = null;
         OutputStream httpOutputStream = null;
         InputStream httpInputStream = null;
         try {
             connection = createAndOpenConnection( push.getWidgetKey() );
             httpOutputStream = connection.getOutputStream();
-            String json = push.toJson();
             logger.info( "Sending: " + json );
             IOUtils.write( json.getBytes(), httpOutputStream );
             if ( connection.getResponseCode() >= 400 ) {
@@ -66,6 +70,5 @@ public class Geckoboard {
         finally {
             bestEffortToReleaseHttpWithoutExceptions( httpOutputStream, httpInputStream, connection );
         }
-
     }
 }

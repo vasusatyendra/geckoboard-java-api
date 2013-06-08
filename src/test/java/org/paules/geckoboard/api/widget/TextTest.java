@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
-import org.paules.geckoboard.api.widget.Text.Type;
+import org.paules.geckoboard.api.json.common.TextItemType;
+import org.paules.geckoboard.helper.JsonTestHelper;
 
 public class TextTest {
 
@@ -17,12 +17,12 @@ public class TextTest {
     public void testJson() throws JsonProcessingException, IOException {
         Text widget = new Text( "1234" );
         widget.addText( "Test1" );
-        widget.addText( "Test2", Type.ALERT );
-        widget.addText( "Test3", Type.INFO );
-        widget.addText( "Test4", Type.NONE );
-
-        ObjectMapper om = new ObjectMapper();
-        JsonNode data = om.readTree( widget.toJson() );
+        widget.addText( "Test2", TextItemType.ALERT );
+        widget.addText( "Test3", TextItemType.INFO );
+        widget.addText( "Test4", TextItemType.NONE );
+        
+        JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
+        
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
 
