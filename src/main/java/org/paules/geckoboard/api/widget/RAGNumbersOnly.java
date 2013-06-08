@@ -1,36 +1,14 @@
 package org.paules.geckoboard.api.widget;
 
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
+import org.paules.geckoboard.api.json.common.TextValueItem;
+
+import com.google.gson.annotations.SerializedName;
 
 public class RAGNumbersOnly extends Push {
-    private static final class Item {
-        private final String text;
-
-        private final int    value;
-
-        public Item( String text, int value ) {
-            super();
-            this.text = text;
-            this.value = value;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    private Item red;
-
-    private Item amber;
-
-    private Item green;
+    @SerializedName( "item" )
+    private final TextValueItem[] items = new TextValueItem[ 3 ];
 
     public RAGNumbersOnly( String widgetKey ) {
         super( widgetKey );
@@ -39,36 +17,17 @@ public class RAGNumbersOnly extends Push {
     @Override
     protected void validate() throws ValidationException {
     }
-
-    @Override
-    protected void getData( ObjectNode data ) {
-        ArrayNode items = data.arrayNode();
-        data.put( "item", items );
-        ObjectNode red = data.objectNode();
-        red.put( "value", this.red.getValue() );
-        red.put( "text", this.red.getText() );
-        items.add( red );
-
-        ObjectNode amber = data.objectNode();
-        amber.put( "value", this.amber.getValue() );
-        amber.put( "text", this.amber.getText() );
-        items.add( amber );
-
-        ObjectNode green = data.objectNode();
-        green.put( "value", this.green.getValue() );
-        green.put( "text", this.green.getText() );
-        items.add( green );
+    
+    public void setRed( String label, int value ) {
+        items[ 0 ] = new TextValueItem( label, value );
     }
 
     public void setAmber( String label, int value ) {
-        amber = new Item( label, value );
+        items[ 1 ] = new TextValueItem( label, value );
     }
 
     public void setGreen( String label, int value ) {
-        green = new Item( label, value );
+        items[ 2 ] = new TextValueItem( label, value );
     }
 
-    public void setRed( String label, int value ) {
-        red = new Item( label, value );
-    }
 }

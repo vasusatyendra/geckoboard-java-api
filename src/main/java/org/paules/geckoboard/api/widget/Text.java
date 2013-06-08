@@ -3,42 +3,15 @@ package org.paules.geckoboard.api.widget;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
+import org.paules.geckoboard.api.json.common.TextItem;
+import org.paules.geckoboard.api.json.common.TextItemType;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Text extends Push {
-    private static class TextItem {
-        private final String text;
-
-        private final Type   type;
-
-        public TextItem( String text, Type type ) {
-            super();
-            this.text = text;
-            this.type = type;
-        }
-
-        public ObjectNode toJson() {
-            ObjectNode item = new ObjectMapper().getNodeFactory().objectNode();
-            item.put( "text", text );
-            item.put( "type", type.jsonValue );
-            return item;
-
-        }
-    }
-
-    public enum Type {
-        NONE( 0 ), ALERT( 1 ), INFO( 2 );
-        private final int jsonValue;
-
-        private Type( int jsonValue ) {
-            this.jsonValue = jsonValue;
-        }
-    }
-
+    @SerializedName( "item" )
     private List<TextItem> text = new LinkedList<TextItem>();
 
     public Text( String widgetKey ) {
@@ -46,23 +19,17 @@ public class Text extends Push {
     }
 
     public void addText( String text ) {
-        addText( text, Type.NONE );
+        addText( text, TextItemType.NONE );
     }
 
-    public void addText( String text, Type type ) {
+    public void addText( String text, TextItemType type ) {
         this.text.add( new TextItem( text, type ) );
     }
 
     @Override
     protected void validate() throws ValidationException {
-    }
-
-    @Override
-    protected void getData( ObjectNode node ) {
-        ArrayNode items = node.arrayNode();
-        for ( TextItem dataEntry : text ) {
-            items.add( dataEntry.toJson() );
+        if ( text.size() == 0 ) {
+            throw new ValidationException( "item", "Cannot be empty" );
         }
-        node.put( "item", items );
     }
 }

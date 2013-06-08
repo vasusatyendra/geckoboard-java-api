@@ -4,36 +4,28 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
-import org.paules.geckoboard.api.json.PieChartData;
+import org.paules.geckoboard.api.json.common.LabelValueColorItem;
+
+import com.google.gson.annotations.SerializedName;
 
 public class PieChart extends Push {
-    private final List<PieChartData> items = new LinkedList<PieChartData>();
+    @SerializedName( "item" )
+    private final List<LabelValueColorItem> items = new LinkedList<LabelValueColorItem>();
 
     public PieChart( String widgetKey ) {
         super( widgetKey );
     }
 
     public void addItem( String label, String value, Color color ) {
-        items.add( new PieChartData( label, value, color ) );
-    }
-    
-    @Override
-    protected void validate() throws ValidationException {
-        if (items.size() == 0) {
-            throw new ValidationException( "item", "At least one item expected" );
-        }
+        items.add( new LabelValueColorItem( label, value, color ) );
     }
 
     @Override
-    protected void getData( ObjectNode node ) {
-        ArrayNode items = node.arrayNode();
-        for ( PieChartData dataEntry : this.items ) {
-            items.add( dataEntry.toJson() );
+    protected void validate() throws ValidationException {
+        if ( items.size() == 0 ) {
+            throw new ValidationException( "item", "At least one item expected" );
         }
-        node.put( "item", items );
     }
 }

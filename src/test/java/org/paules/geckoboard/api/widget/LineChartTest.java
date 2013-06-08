@@ -9,9 +9,9 @@ import java.util.Arrays;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
+import org.paules.geckoboard.helper.JsonTestHelper;
 
 public class LineChartTest {
 
@@ -23,11 +23,11 @@ public class LineChartTest {
         widget.addDataPoint( "4" );
         widget.addDataPoint( "0.4" );
         widget.setColor( Color.RED );
-        widget.setXAxisLabels( Arrays.asList( new String[] { "Jan", "Feb", "Mar", "Apr" } ) );
-        widget.setYAxisLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
+        widget.setAxisXLabels( Arrays.asList( new String[] { "Jan", "Feb", "Mar", "Apr" } ) );
+        widget.setAxisYLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
 
-        ObjectMapper om = new ObjectMapper();
-        JsonNode data = om.readTree( widget.toJson() );
+        JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
+
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
         assertTrue( node.get( "item" ).isArray() );

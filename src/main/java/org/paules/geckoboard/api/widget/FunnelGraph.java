@@ -3,12 +3,12 @@ package org.paules.geckoboard.api.widget;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
-import org.paules.geckoboard.api.json.FunnelGraphData;
-import org.paules.geckoboard.api.json.GraphType;
+import org.paules.geckoboard.api.json.common.GraphType;
+import org.paules.geckoboard.api.json.common.LabelValueItem;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @author Paul van Assen
@@ -16,46 +16,39 @@ import org.paules.geckoboard.api.json.GraphType;
  *         http://www.geckoboard.com/developers/custom-widgets/widget-types/funnel-graph/
  */
 public class FunnelGraph extends Push {
-    private final List<FunnelGraphData> data = new LinkedList<FunnelGraphData>();
+    @SerializedName( "item" )
+    private final List<LabelValueItem> items = new LinkedList<LabelValueItem>();
 
-    private final GraphType             type;
+    @SuppressWarnings( "unused" )
+    @SerializedName( "type" )
+    private final GraphType             graphType;
 
-    private final boolean               showPercentage;
+    @SuppressWarnings( "unused" )
+    private final String                percentage;
 
     public FunnelGraph( String widgetKey, boolean showPercentage ) {
         this( widgetKey, GraphType.STANDARD, showPercentage );
     }
 
-    public FunnelGraph( String widgetKey, GraphType type, boolean showPercentage ) {
+    public FunnelGraph( String widgetKey, GraphType graphType, boolean showPercentage ) {
         super( widgetKey );
-        this.type = type;
-        this.showPercentage = showPercentage;
+        this.graphType = graphType;
+        if ( showPercentage ) {
+            percentage = "show";
+        }
+        else {
+            percentage = "hide";
+        }
     }
 
     public void addData( String label, String value ) {
-        data.add( new FunnelGraphData( label, value ) );
+        items.add( new LabelValueItem( label, value ) );
     }
 
     @Override
     protected void validate() throws ValidationException {
-        if ( data.size() == 0 ) {
+        if ( items.size() == 0 ) {
             throw new ValidationException( "item", "Items cannot be empty" );
-        }
-    }
-
-    @Override
-    protected void getData( ObjectNode data ) {
-        data.put( "type", type.toString().toLowerCase() );
-        if ( showPercentage ) {
-            data.put( "percentage", "show" );
-        }
-        else {
-            data.put( "percentage", "hide" );
-        }
-        ArrayNode items = data.arrayNode();
-        data.put( "item", items );
-        for ( FunnelGraphData dataEntry : this.data ) {
-            items.add( dataEntry.toJson() );
         }
     }
 }
