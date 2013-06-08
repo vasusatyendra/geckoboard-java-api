@@ -1,19 +1,22 @@
 package org.paules.geckoboard.api.widget;
 
-import org.codehaus.jackson.node.ObjectNode;
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
-import org.paules.geckoboard.api.json.GeckOData;
-import org.paules.geckoboard.api.json.GraphType;
+import org.paules.geckoboard.api.json.common.GraphType;
+import org.paules.geckoboard.api.json.common.TextStrValueItem;
+
+import com.google.gson.annotations.SerializedName;
 
 public class GeckOMeter extends Push {
+    @SerializedName("type")
     private final GraphType type;
 
+    @SerializedName("item")
     private String          current;
 
-    private GeckOData       min;
+    private TextStrValueItem       min;
 
-    private GeckOData       max;
+    private TextStrValueItem       max;
 
     public GeckOMeter( String widgetKey, GraphType type ) {
         super( widgetKey );
@@ -22,19 +25,18 @@ public class GeckOMeter extends Push {
     
     @Override
     protected void validate() throws ValidationException {
-    }
-
-    @Override
-    protected void getData( ObjectNode node ) {
-        if ( type == GraphType.REVERSE ) {
-            node.put( "type", "reverse" );
+        if (current == null || current.isEmpty()) {
+            throw new ValidationException( "current", "Must be set");
         }
-        else {
-            node.put( "type", "standard" );
+        if (min == null ) {
+            throw new ValidationException( "min", "Must be set");
         }
-        node.put( "item", current );
-        node.put( "min", min.toJson() );
-        node.put( "max", max.toJson() );
+        if (max == null ) {
+            throw new ValidationException( "max", "Must be set");
+        }
+        if (type == null ) {
+            throw new ValidationException( "type", "Must be set");
+        }
     }
 
     public void setCurrent( String current ) {
@@ -42,10 +44,10 @@ public class GeckOMeter extends Push {
     }
 
     public void setMax( String label, String value ) {
-        max = new GeckOData( label, value );
+        max = new TextStrValueItem( label, value );
     }
 
     public void setMin( String label, String value ) {
-        min = new GeckOData( label, value );
+        min = new TextStrValueItem( label, value );
     }
 }

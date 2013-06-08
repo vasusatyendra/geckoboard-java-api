@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.junit.Assert;
 import org.junit.Test;
-import org.paules.geckoboard.api.json.RAGColor;
+import org.paules.geckoboard.api.json.bulletgraph.RAGColor;
+import org.paules.geckoboard.helper.JsonTestHelper;
 
 public class BulletGraphTest {
 
@@ -27,8 +27,8 @@ public class BulletGraphTest {
         widget.addRange( 10, 20, RAGColor.AMBER );
         widget.addRange( 20, 30, RAGColor.GREEN );
 
-        ObjectMapper om = new ObjectMapper();
-        JsonNode data = om.readTree( widget.toJson() );
+        JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
+
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
         JsonNode item = node.get( "item" );
