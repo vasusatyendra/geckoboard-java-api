@@ -12,3 +12,5 @@ Already done:
 
 - Write tests
 - Switch from jackson to gson, using object trees instead of pushing stuff 
+
+Some examples: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
