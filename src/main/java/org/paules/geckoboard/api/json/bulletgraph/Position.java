@@ -1,16 +1,26 @@
 package org.paules.geckoboard.api.json.bulletgraph;
 
-
+/**
+ * Bullet graph position object
+ * @author Paul van Assen
+ *
+ */
 public class Position {
-    @SuppressWarnings( "unused" )
-    private int start;
+    private final int start;
 
-    @SuppressWarnings( "unused" )
-    private int end;
+    private final int end;
 
     public Position( int start, int end ) {
         super();
         this.start = start;
         this.end = end;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
     }
 }

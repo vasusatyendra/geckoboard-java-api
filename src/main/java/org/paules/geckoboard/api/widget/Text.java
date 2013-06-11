@@ -5,11 +5,16 @@ import java.util.List;
 
 import org.paules.geckoboard.api.Push;
 import org.paules.geckoboard.api.error.ValidationException;
-import org.paules.geckoboard.api.json.common.TextItem;
-import org.paules.geckoboard.api.json.common.TextItemType;
+import org.paules.geckoboard.api.json.text.TextItem;
+import org.paules.geckoboard.api.json.text.TextItemType;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Text widget type
+ * 
+ * @author Paul van Assen
+ */
 public class Text extends Push {
     @SerializedName( "item" )
     private List<TextItem> text = new LinkedList<TextItem>();

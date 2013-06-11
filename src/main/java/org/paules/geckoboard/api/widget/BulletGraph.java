@@ -10,12 +10,12 @@ import org.paules.geckoboard.api.json.bulletgraph.RAGColor;
 import org.paules.geckoboard.api.json.bulletgraph.Range;
 
 /**
+ * Element for submitting data to the bullet graph
+ * http://www.geckoboard.com/developers/custom-widgets/widget-types/bullet-graph/
+ * 
  * @author Paul van Assen
- *         Element for submitting data to the bullet graph
- *         http://www.geckoboard.com/developers/custom-widgets/widget-types/bullet-graph/
  */
 public class BulletGraph extends Push {
-    @SuppressWarnings( "unused" )
     private final String    orientation;
 
     private BulletGraphItem item = new BulletGraphItem();
@@ -32,10 +32,6 @@ public class BulletGraph extends Push {
 
     public void addRange( int start, int end, RAGColor color ) {
         item.getRanges().add( new Range( start, end, color ) );
-    }
-
-    @Override
-    protected void validate() throws ValidationException {
     }
 
     public void setAxisPoints( List<String> points ) {
@@ -60,5 +56,13 @@ public class BulletGraph extends Push {
 
     public void setSubLabel( String subLabel ) {
         item.setSubLabel( subLabel );
+    }
+
+    public String getOrientation() {
+        return orientation;
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
     }
 }

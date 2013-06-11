@@ -9,7 +9,6 @@ import java.awt.Color;
  */
 public class LabelValueColorItem extends LabelValueItem {
 
-    @SuppressWarnings( "unused" )
     private final Color color;
 
     public LabelValueColorItem( String label, String value, Color color ) {
@@ -17,4 +16,7 @@ public class LabelValueColorItem extends LabelValueItem {
         this.color = color;
     }
 
+    public Color getColor() {
+        return color;
+    }
 }

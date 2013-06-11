@@ -1,4 +1,4 @@
-package org.paules.geckoboard.api.json.common;
+package org.paules.geckoboard.api.json.text;
 
 import com.google.gson.annotations.SerializedName;
 

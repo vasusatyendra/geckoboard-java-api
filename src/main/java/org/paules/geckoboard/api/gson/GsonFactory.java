@@ -17,11 +17,6 @@ public final class GsonFactory {
 
     private static final GsonFactory INSTANCE = new GsonFactory();
 
-    private GsonFactory() {
-        gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter( Color.class, new AwtColorTypeAdapter() );
-    }
-
     /**
      * Get a correct configured gson
      * 
@@ -29,5 +24,10 @@ public final class GsonFactory {
      */
     public static Gson getGson() {
         return INSTANCE.gsonBuilder.create();
+    }
+
+    private GsonFactory() {
+        gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter( Color.class, new AwtColorTypeAdapter() );
     }
 }

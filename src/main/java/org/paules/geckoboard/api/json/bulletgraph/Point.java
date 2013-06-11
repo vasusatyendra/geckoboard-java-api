@@ -6,10 +6,13 @@ package org.paules.geckoboard.api.json.bulletgraph;
  * @author Paul van Assen
  */
 public class Point {
-    @SuppressWarnings( "unused" )
-    private String point;
+    private final String point;
 
     public Point( String point ) {
         this.point = point;
+    }
+
+    public String getPoint() {
+        return point;
     }
 }

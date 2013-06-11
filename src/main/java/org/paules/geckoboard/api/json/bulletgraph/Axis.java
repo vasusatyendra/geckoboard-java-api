@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Axis class for bullet graph
+ * 
  * @author Paul van Assen
- *
  */
 public class Axis {
     @SerializedName( "point" )

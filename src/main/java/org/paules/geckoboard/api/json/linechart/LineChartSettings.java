@@ -16,13 +16,8 @@ public class LineChartSettings {
 
     private final List<String> axisy = new LinkedList<String>();
 
-    @SuppressWarnings( "unused" )
     @SerializedName( "colour" )
     private Color              color;
-
-    public void setColor( Color color ) {
-        this.color = color;
-    }
 
     public List<String> getAxisx() {
         return axisx;
@@ -30,6 +25,14 @@ public class LineChartSettings {
 
     public List<String> getAxisy() {
         return axisy;
+    }
+
+    public void setColor( Color color ) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
 }

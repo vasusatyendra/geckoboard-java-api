@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Wrapper to get correct json through gson
+ * 
  * @author Paul van Assen
- *
  */
 public class WidgetWrapper {
     @SerializedName( "data" )
@@ -19,12 +19,12 @@ public class WidgetWrapper {
         this.apiKey = apiKey;
     }
 
-    public Push getPush() {
-        return push;
-    }
-
     public String getApiKey() {
         return apiKey;
+    }
+
+    public Push getPush() {
+        return push;
     }
 
 }

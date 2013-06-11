@@ -8,7 +8,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.paules.geckoboard.api.json.common.TextItemType;
+import org.paules.geckoboard.api.json.text.TextItemType;
 import org.paules.geckoboard.helper.JsonTestHelper;
 
 public class TextTest {
@@ -20,9 +20,9 @@ public class TextTest {
         widget.addText( "Test2", TextItemType.ALERT );
         widget.addText( "Test3", TextItemType.INFO );
         widget.addText( "Test4", TextItemType.NONE );
-        
+
         JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
-        
+
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
 
