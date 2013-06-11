@@ -1,5 +1,10 @@
 package org.paules.geckoboard.api.json.common;
 
+/**
+ * Text int value item holder for generic use
+ * 
+ * @author Paul van Assen
+ */
 public class TextValueItem {
     private final String text;
 

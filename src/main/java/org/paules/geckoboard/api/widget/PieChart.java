@@ -10,6 +10,11 @@ import org.paules.geckoboard.api.json.common.LabelValueColorItem;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Pie chart widget
+ * 
+ * @author Paul van Assen
+ */
 public class PieChart extends Push {
     @SerializedName( "item" )
     private final List<LabelValueColorItem> items = new LinkedList<LabelValueColorItem>();

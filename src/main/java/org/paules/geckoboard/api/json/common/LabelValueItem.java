@@ -6,15 +6,21 @@ package org.paules.geckoboard.api.json.common;
  * @author Paul van Assen
  */
 public class LabelValueItem {
-    @SuppressWarnings( "unused" )
     private final String label;
 
-    @SuppressWarnings( "unused" )
-    private String       value;
+    private final String value;
 
     public LabelValueItem( String label, String value ) {
         super();
         this.label = label;
         this.value = value;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

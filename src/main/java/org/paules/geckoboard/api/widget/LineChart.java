@@ -12,6 +12,11 @@ import org.paules.geckoboard.api.json.linechart.LineChartSettings;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Line chart widget
+ * 
+ * @author Paul van Assen
+ */
 public class LineChart extends Push {
     @SerializedName( "item" )
     private final List<String>      items    = new LinkedList<String>();
@@ -24,23 +29,6 @@ public class LineChart extends Push {
 
     public void addDataPoint( String dataPoint ) {
         items.add( dataPoint );
-    }
-
-    @Override
-    protected void validate() throws ValidationException {
-        if ( items.size() == 0 ) {
-            throw new ValidationException( "item", "Must be filled" );
-        }
-        if ( settings.getAxisx().size() == 0 ) {
-            throw new ValidationException( "axisx", "Must be filled" );
-        }
-        if ( settings.getAxisy().size() == 0 ) {
-            throw new ValidationException( "axisy", "Must be filled" );
-        }
-    }
-
-    public void setColor( Color color ) {
-        settings.setColor( color );
     }
 
     public void setAxisXLabels( Collection<String> labels ) {
@@ -59,5 +47,22 @@ public class LineChart extends Push {
 
     public void setAxisYLabels( String[] labels ) {
         setAxisYLabels( Arrays.asList( labels ) );
+    }
+
+    public void setColor( Color color ) {
+        settings.setColor( color );
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
+        if ( items.size() == 0 ) {
+            throw new ValidationException( "item", "Must be filled" );
+        }
+        if ( settings.getAxisx().size() == 0 ) {
+            throw new ValidationException( "axisx", "Must be filled" );
+        }
+        if ( settings.getAxisy().size() == 0 ) {
+            throw new ValidationException( "axisy", "Must be filled" );
+        }
     }
 }

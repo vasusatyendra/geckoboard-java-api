@@ -9,10 +9,10 @@ public abstract class Push {
         this.widgetKey = widgetKey;
     }
 
-    protected abstract void validate() throws ValidationException;
-
     String getWidgetKey() {
         return widgetKey;
     }
+
+    protected abstract void validate() throws ValidationException;
 
 }

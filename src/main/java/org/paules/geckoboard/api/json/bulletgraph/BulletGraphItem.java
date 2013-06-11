@@ -5,12 +5,15 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Data to fill a bullet graph
+ * 
+ * @author Paul van Assen
+ */
 public class BulletGraphItem {
-    @SuppressWarnings( "unused" )
     private String            label;
 
     @SerializedName( "sublabel" )
-    @SuppressWarnings( "unused" )
     private String            subLabel;
 
     private final Axis        axis    = new Axis();
@@ -20,7 +23,6 @@ public class BulletGraphItem {
 
     private final Measure     measure = new Measure();
 
-    @SuppressWarnings( "unused" )
     private Point             comparative;
 
     public void setLabel( String label ) {
@@ -49,6 +51,26 @@ public class BulletGraphItem {
 
     public void setComparative( String comparative ) {
         this.comparative = new Point( comparative );
+    }
+
+    public Point getComparative() {
+        return comparative;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public Axis getAxis() {
+        return axis;
+    }
+
+    public Measure getMeasure() {
+        return measure;
+    }
+
+    public String getSubLabel() {
+        return subLabel;
     }
 
 }

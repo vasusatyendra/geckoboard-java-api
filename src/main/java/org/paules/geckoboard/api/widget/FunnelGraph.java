@@ -11,20 +11,19 @@ import org.paules.geckoboard.api.json.common.LabelValueItem;
 import com.google.gson.annotations.SerializedName;
 
 /**
+ * Element for submiting data to the funnel graph
+ * http://www.geckoboard.com/developers/custom-widgets/widget-types/funnel-graph/
+ * 
  * @author Paul van Assen
- *         Element for submiting data to the funnel graph
- *         http://www.geckoboard.com/developers/custom-widgets/widget-types/funnel-graph/
  */
 public class FunnelGraph extends Push {
     @SerializedName( "item" )
     private final List<LabelValueItem> items = new LinkedList<LabelValueItem>();
 
-    @SuppressWarnings( "unused" )
     @SerializedName( "type" )
-    private final GraphType             graphType;
+    private final GraphType            graphType;
 
-    @SuppressWarnings( "unused" )
-    private final String                percentage;
+    private final String               percentage;
 
     public FunnelGraph( String widgetKey, boolean showPercentage ) {
         this( widgetKey, GraphType.STANDARD, showPercentage );
@@ -49,6 +48,12 @@ public class FunnelGraph extends Push {
     protected void validate() throws ValidationException {
         if ( items.size() == 0 ) {
             throw new ValidationException( "item", "Items cannot be empty" );
+        }
+        if ( graphType == null ) {
+            throw new ValidationException( "graphType", "Cannot be null" );
+        }
+        if ( percentage == null ) {
+            throw new ValidationException( "percentage", "Cannot be null" );
         }
     }
 }

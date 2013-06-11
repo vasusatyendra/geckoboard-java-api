@@ -8,11 +8,10 @@ import org.paules.geckoboard.api.json.common.TextValuePrefixItem;
 import com.google.gson.annotations.SerializedName;
 
 public class RAGColumnsAndNumbers extends Push {
-    @SerializedName("item")
+    @SerializedName( "item" )
     private TextValuePrefixItem[] items = new TextValuePrefixItem[ 3 ];
 
-    @SuppressWarnings( "unused" )
-    @SerializedName("type")
+    @SerializedName( "type" )
     private GraphType             graphType;
 
     public RAGColumnsAndNumbers( String widgetKey, GraphType graphType ) {
@@ -20,12 +19,8 @@ public class RAGColumnsAndNumbers extends Push {
         this.graphType = graphType;
     }
 
-    @Override
-    protected void validate() throws ValidationException {
-    }
-
     public void setAmber( String label, int value ) {
-        setAmber(label, value, null);
+        setAmber( label, value, null );
     }
 
     public void setAmber( String label, int value, String prefix ) {
@@ -33,7 +28,7 @@ public class RAGColumnsAndNumbers extends Push {
     }
 
     public void setGreen( String label, int value ) {
-        setGreen(label, value, null);
+        setGreen( label, value, null );
     }
 
     public void setGreen( String label, int value, String prefix ) {
@@ -41,10 +36,17 @@ public class RAGColumnsAndNumbers extends Push {
     }
 
     public void setRed( String label, int value ) {
-        setRed(label, value, null);
+        setRed( label, value, null );
     }
 
     public void setRed( String label, int value, String prefix ) {
         items[ 2 ] = new TextValuePrefixItem( label, value, prefix );
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
+        if (graphType == null) {
+            throw new ValidationException( "graphType", "Cannot be null" );
+        }
     }
 }

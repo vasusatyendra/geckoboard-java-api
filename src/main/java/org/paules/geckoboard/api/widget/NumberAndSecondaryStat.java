@@ -13,11 +13,10 @@ public class NumberAndSecondaryStat extends Push {
     private final TextStrValueItem[] items = new TextStrValueItem[ 2 ];
 
     @SuppressWarnings( "unused" )
-    private final boolean               absolute;
+    private final boolean            absolute;
 
-    @SuppressWarnings( "unused" )
     @SerializedName( "type" )
-    private final GraphType             graphType;
+    private final GraphType          graphType;
 
     public NumberAndSecondaryStat( String widgetKey, boolean absolute, GraphType graphType ) {
         super( widgetKey );
@@ -25,19 +24,22 @@ public class NumberAndSecondaryStat extends Push {
         this.graphType = graphType;
     }
 
-    @Override
-    protected void validate() throws ValidationException {
-        if ( items[0] != null ) {
-            throw new ValidationException( "primary", "cannot be empty" );
-        }
-    }
-
     public void setPrimary( String primary, String prefix ) {
-        items[0] = new TextStrValuePrefixItem("",primary, prefix );
+        items[ 0 ] = new TextStrValuePrefixItem( "", primary, prefix );
     }
 
     public void setSecondary( String secondary ) {
-        items[1] = new TextStrValueItem("",secondary);
+        items[ 1 ] = new TextStrValueItem( "", secondary );
+    }
+
+    @Override
+    protected void validate() throws ValidationException {
+        if ( items[ 0 ] != null ) {
+            throw new ValidationException( "primary", "Cannot be empty" );
+        }
+        if (graphType == null) {
+            throw new ValidationException( "graphType", "Cannot be null" );
+        }
     }
 
 }

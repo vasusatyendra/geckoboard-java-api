@@ -7,7 +7,7 @@ public class GeckoboardException extends RuntimeException {
         super( message );
     }
 
-    public GeckoboardException(String message, Throwable cause) {
-        super(message, cause);
+    public GeckoboardException( String message, Throwable cause ) {
+        super( message, cause );
     }
 }

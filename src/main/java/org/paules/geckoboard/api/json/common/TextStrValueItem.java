@@ -1,5 +1,10 @@
 package org.paules.geckoboard.api.json.common;
 
+/**
+ * A text-string value type for generic use
+ * 
+ * @author Paul van Assen
+ */
 public class TextStrValueItem {
     private final String text;
 
