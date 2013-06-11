@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
 import org.paules.geckoboard.api.gson.GsonFactory;
@@ -14,13 +15,15 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 public class Geckoboard {
-    private final Logger        logger               = LoggerFactory.getLogger( getClass() );
+    private final Logger         logger               = LoggerFactory.getLogger( getClass() );
 
-    private static final int    RECOMMENDED_TIME_OUT = 70000;
+    private static final int     RECOMMENDED_TIME_OUT = 70000;
 
-    private static final String CONTENT_TYPE         = "Content-Type";
+    private static final String  CONTENT_TYPE         = "Content-Type";
 
-    private static final String CONTENT_TYPE_VALUE   = "application/json";
+    private static final String  CONTENT_TYPE_VALUE   = "application/json";
+
+    private static final Charset DEFAULT_CHARSET      = Charset.forName( "UTF-8" );
 
     private static void bestEffortToReleaseHttpWithoutExceptions( final OutputStream httpOutputStream, final InputStream httpInputStream, final HttpURLConnection connection ) {
         IOUtils.closeQuietly( httpOutputStream );
@@ -58,14 +61,14 @@ public class Geckoboard {
             connection = createAndOpenConnection( push.getWidgetKey() );
             httpOutputStream = connection.getOutputStream();
             logger.info( "Sending: " + json );
-            IOUtils.write( json.getBytes(), httpOutputStream );
+            IOUtils.write( json.getBytes(DEFAULT_CHARSET), httpOutputStream );
             if ( connection.getResponseCode() >= 400 ) {
-                logger.error( new String( IOUtils.toByteArray( connection.getErrorStream() ) ) );
+                logger.error( new String( IOUtils.toByteArray( connection.getErrorStream() ), DEFAULT_CHARSET ) );
                 return;
             }
             httpInputStream = connection.getInputStream();
             final byte[] responseXml = IOUtils.toByteArray( httpInputStream );
-            logger.info( new String( responseXml ) );
+            logger.info( new String( responseXml, DEFAULT_CHARSET ) );
         }
         finally {
             bestEffortToReleaseHttpWithoutExceptions( httpOutputStream, httpInputStream, connection );
