@@ -14,20 +14,15 @@ public enum TextItemType {
      * No alert icon
      */
     @SerializedName( "0" )
-    NONE( 0 ),
+    NONE(),
     /**
      * Alert icon
      */
     @SerializedName( "1" )
-    ALERT( 1 ),
+    ALERT(),
     /**
      * Info icon
      */
     @SerializedName( "2" )
-    INFO( 2 );
-    final int jsonValue;
-
-    private TextItemType( int jsonValue ) {
-        this.jsonValue = jsonValue;
-    }
+    INFO();
 }
