@@ -1,6 +1,7 @@
 package com.github.geckoboard.api.widget;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
@@ -10,7 +11,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.github.geckoboard.api.json.text.TextItemType;
-import com.github.geckoboard.api.widget.Text;
 import com.github.geckoboard.helper.JsonTestHelper;
 
 public class TextTest {
@@ -27,7 +27,7 @@ public class TextTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
-
+        assertNull(node.get( "widgetKey" ));
         assertEquals( 4, node.get( "item" ).size() );
 
         assertEquals( "Test1", node.get( "item" ).get( 0 ).get( "text" ).asText() );

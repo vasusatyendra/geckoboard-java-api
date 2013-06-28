@@ -1,6 +1,7 @@
 package com.github.geckoboard.api.widget;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ public class RAGNumbersOnlyTest {
         JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
 
         assertEquals( 3, node.get( "item" ).size() );
         assertEquals( "Test-red", node.get( "item" ).get( 0 ).get( "text" ).asText() );

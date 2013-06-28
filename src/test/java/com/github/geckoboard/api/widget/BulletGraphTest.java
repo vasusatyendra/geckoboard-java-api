@@ -1,5 +1,7 @@
 package com.github.geckoboard.api.widget;
 
+import static org.junit.Assert.assertNull;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -33,6 +35,8 @@ public class BulletGraphTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
+
         JsonNode item = node.get( "item" );
         Assert.assertEquals( "test-label", item.get( "label" ).asText() );
         Assert.assertEquals( "sub-test-label", item.get( "sublabel" ).asText() );

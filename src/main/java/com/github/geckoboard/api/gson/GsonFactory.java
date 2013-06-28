@@ -24,6 +24,8 @@ public final class GsonFactory {
 
     private static final String      USER_OBJECT = "userObject";
 
+    private static final String      WIDGET_KEY = "widgetKey";
+
     private static final GsonFactory INSTANCE    = new GsonFactory();
 
     /**
@@ -50,7 +52,8 @@ public final class GsonFactory {
 
             @Override
             public boolean shouldSkipField( FieldAttributes attributes ) {
-                return attributes.getName().equals( USER_OBJECT );
+                String name = attributes.getName();
+                return name.equals( USER_OBJECT ) || name.equals( WIDGET_KEY );
             }
         } );
 

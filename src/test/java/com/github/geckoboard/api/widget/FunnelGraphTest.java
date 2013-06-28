@@ -1,6 +1,7 @@
 package com.github.geckoboard.api.widget;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
@@ -28,6 +29,8 @@ public class FunnelGraphTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
+
         assertEquals( "standard", node.get( "type" ).asText() );
         assertEquals( "hide", node.get( "percentage" ).asText() );
 
