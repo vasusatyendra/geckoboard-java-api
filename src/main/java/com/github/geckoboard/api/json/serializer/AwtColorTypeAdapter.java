@@ -22,6 +22,10 @@ public class AwtColorTypeAdapter extends TypeAdapter<Color> {
 
     @Override
     public void write( JsonWriter out, Color color ) throws IOException {
+        if (color == null) {
+            out.nullValue();
+            return;
+        }
         String colorStr = String.format( "%06X%02X", ( 0xFFFFFF & color.getRGB() ), ( 0xFF & color.getAlpha() ) );
         out.value( colorStr );
     }
