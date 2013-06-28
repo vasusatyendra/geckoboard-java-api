@@ -63,7 +63,7 @@ public class Geckoboard {
             logger.info( "Sending: " + json );
             IOUtils.write( json.getBytes( DEFAULT_CHARSET ), httpOutputStream );
             if ( connection.getResponseCode() >= 400 ) {
-                logger.error( new String( IOUtils.toByteArray( connection.getErrorStream() ), DEFAULT_CHARSET ) );
+                logger.error( "Error sending json, error: " + new String( IOUtils.toByteArray( connection.getErrorStream() ), DEFAULT_CHARSET ) + ", json send: " + json );
                 return;
             }
             httpInputStream = connection.getInputStream();
