@@ -1,5 +1,7 @@
 package com.github.geckoboard.api.widget;
 
+import static org.junit.Assert.assertNull;
+
 import java.io.IOException;
 
 import org.codehaus.jackson.JsonNode;
@@ -35,6 +37,8 @@ public class HighChartTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
+
         Assert.assertNotNull( node.get( "highchart" ) );
         JsonNode highchart = node.get("highchart");
         Assert.assertEquals( "Expected pie json", pieJson, highchart.toString() );

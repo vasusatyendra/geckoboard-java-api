@@ -1,6 +1,7 @@
 package com.github.geckoboard.api.widget;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -26,6 +27,8 @@ public class NumberAndSecondaryStatTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
+
         assertTrue( node.get( "absolute" ).asBoolean() );
         assertEquals( "reverse", node.get( "type" ).asText() );
         assertEquals( "10", node.get( "item" ).get( 0 ).get( "value" ).asText() );

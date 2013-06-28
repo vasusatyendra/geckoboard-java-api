@@ -1,6 +1,7 @@
 package com.github.geckoboard.api.widget;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class PieChartTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
+
         assertEquals( 4, node.get( "item" ).size() );
         assertEquals( "Test1", node.get( "item" ).get( 0 ).get( "label" ).asText() );
         assertEquals( "100", node.get( "item" ).get( 0 ).get( "value" ).asText() );

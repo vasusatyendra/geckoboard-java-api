@@ -1,6 +1,7 @@
 package com.github.geckoboard.api.widget;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
@@ -26,6 +27,8 @@ public class GeckOMeterTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
+
         assertEquals( "10", node.get( "item" ).asText() );
         assertEquals( "0", node.get( "min" ).get( "value" ).asText() );
         assertEquals( "No one", node.get( "min" ).get( "text" ).asText() );

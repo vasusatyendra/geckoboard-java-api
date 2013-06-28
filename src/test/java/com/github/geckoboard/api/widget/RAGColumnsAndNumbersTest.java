@@ -27,6 +27,7 @@ public class RAGColumnsAndNumbersTest {
 
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
+        assertNull(node.get( "widgetKey" ));
 
         assertEquals( "standard", node.get( "type" ).asText() );
 
