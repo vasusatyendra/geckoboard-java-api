@@ -16,6 +16,7 @@ import com.github.geckoboard.api.json.bulletgraph.Range;
  * @author Paul van Assen
  */
 public class BulletGraph extends Push {
+    @SuppressWarnings( "unused" )
     private final String    orientation;
 
     private BulletGraphItem item = new BulletGraphItem();
@@ -32,9 +33,10 @@ public class BulletGraph extends Push {
 
     /**
      * Adds a new range to the bullet graph. A range is a colored band of either red, amber or green
-     * @param start
-     * @param end
-     * @param color
+     * 
+     * @param start Start of the range
+     * @param end End of the range
+     * @param color Color, either red, amber or green
      */
     public void addRange( int start, int end, RAGColor color ) {
         item.getRanges().add( new Range( start, end, color ) );
@@ -64,11 +66,8 @@ public class BulletGraph extends Push {
         item.setSubLabel( subLabel );
     }
 
-    public String getOrientation() {
-        return orientation;
-    }
-
     @Override
     protected void validate() throws ValidationException {
+        item.validate();
     }
 }

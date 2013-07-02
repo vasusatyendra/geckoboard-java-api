@@ -3,6 +3,7 @@ package com.github.geckoboard.api.json.bulletgraph;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.github.geckoboard.api.error.ValidationException;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -14,6 +15,7 @@ public class BulletGraphItem {
     private String            label;
 
     @SerializedName( "sublabel" )
+    @SuppressWarnings( "unused" )
     private String            subLabel;
 
     private final Axis        axis    = new Axis();
@@ -53,24 +55,20 @@ public class BulletGraphItem {
         this.comparative = new Point( comparative );
     }
 
-    public Point getComparative() {
-        return comparative;
+    public void validate() throws ValidationException {
+        if ( label == null ) {
+            throw new ValidationException( "item.label", "Label cannot be empty" );
+        }
+        if ( axis.getPoints().size() == 0 ) {
+            throw new ValidationException( "item.point", "Points must be set" );
+        }
+        if ( ranges.size() == 0 ) {
+            throw new ValidationException( "item.ranges", "Ranges must be set" );
+        }
+        if (comparative == null) {
+            throw new ValidationException( "item.comparative", "Comparative must be set" );
+        }
+        measure.validate();
+        comparative.validate();
     }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public Axis getAxis() {
-        return axis;
-    }
-
-    public Measure getMeasure() {
-        return measure;
-    }
-
-    public String getSubLabel() {
-        return subLabel;
-    }
-
 }

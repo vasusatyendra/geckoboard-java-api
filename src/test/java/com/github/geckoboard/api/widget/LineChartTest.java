@@ -13,7 +13,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.github.geckoboard.api.widget.LineChart;
+import com.github.geckoboard.api.error.ValidationException;
 import com.github.geckoboard.helper.JsonTestHelper;
 
 public class LineChartTest {
@@ -28,7 +28,8 @@ public class LineChartTest {
         widget.setColor( Color.RED );
         widget.setAxisXLabels( Arrays.asList( new String[] { "Jan", "Feb", "Mar", "Apr" } ) );
         widget.setAxisYLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
-
+        widget.validate();
+        
         JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
 
         Assert.assertNotNull( data.get( "data" ) );
@@ -59,5 +60,42 @@ public class LineChartTest {
 
         assertEquals( "FF0000FF", node.get( "settings" ).get( "colour" ).asText() );
     }
+    
+    @Test(expected=ValidationException.class)
+    public void testValidateEmptyItems() {
+        LineChart widget = new LineChart( "1234" );
+        widget.setColor( Color.RED );
+        widget.setAxisXLabels( Arrays.asList( new String[] { "Jan", "Feb", "Mar", "Apr" } ) );
+        widget.setAxisYLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
+        widget.validate();
+    }
 
+    @Test(expected=ValidationException.class)
+    public void testValidateEmptySettingsAxisX() {
+        LineChart widget = new LineChart( "1234" );
+        widget.addDataPoint( "1.2" );
+        widget.addDataPoint( "2.0" );
+        widget.addDataPoint( "4" );
+        widget.addDataPoint( "0.4" );
+        widget.setColor( Color.RED );
+        widget.setAxisYLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
+        widget.validate();
+    }
+
+    @Test(expected=ValidationException.class)
+    public void testValidateEmptySettingsAxisY() {
+        LineChart widget = new LineChart( "1234" );
+        widget.addDataPoint( "1.2" );
+        widget.addDataPoint( "2.0" );
+        widget.addDataPoint( "4" );
+        widget.addDataPoint( "0.4" );
+        widget.setColor( Color.RED );
+        widget.setAxisXLabels( Arrays.asList( new String[] { "1", "2", "3", "4", "5" } ) );
+        widget.validate();
+    }
+    
+    @Test(expected=ValidationException.class)
+    public void testValidateNewObject() {
+        new LineChart( "1234" ).validate();
+    }
 }

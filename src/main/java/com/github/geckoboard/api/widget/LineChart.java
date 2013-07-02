@@ -1,11 +1,9 @@
 package com.github.geckoboard.api.widget;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
 
 import com.github.geckoboard.api.Push;
 import com.github.geckoboard.api.error.ValidationException;
@@ -36,17 +34,9 @@ public class LineChart extends Push {
         settings.getAxisx().addAll( labels );
     }
 
-    public void setAxisXLabels( String[] labels ) {
-        setAxisXLabels( Arrays.asList( labels ) );
-    }
-
     public void setAxisYLabels( Collection<String> labels ) {
         settings.getAxisy().clear();
         settings.getAxisy().addAll( labels );
-    }
-
-    public void setAxisYLabels( String[] labels ) {
-        setAxisYLabels( Arrays.asList( labels ) );
     }
 
     public void setColor( Color color ) {
