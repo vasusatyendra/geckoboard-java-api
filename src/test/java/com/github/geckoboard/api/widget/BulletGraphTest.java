@@ -11,6 +11,7 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.github.geckoboard.api.error.ValidationException;
 import com.github.geckoboard.api.json.bulletgraph.RAGColor;
 import com.github.geckoboard.api.widget.BulletGraph;
 import com.github.geckoboard.helper.JsonTestHelper;
@@ -30,6 +31,7 @@ public class BulletGraphTest {
         widget.addRange( 0, 10, RAGColor.RED );
         widget.addRange( 10, 20, RAGColor.AMBER );
         widget.addRange( 20, 30, RAGColor.GREEN );
+        widget.validate();
 
         JsonNode data = JsonTestHelper.getJsonFromWidget( widget );
 
@@ -54,7 +56,6 @@ public class BulletGraphTest {
         Assert.assertEquals( 0, ranges.get( 0 ).get( "start" ).asInt() );
         Assert.assertEquals( 10, ranges.get( 0 ).get( "end" ).asInt() );
 
-        // "measure\":{\"current\":{\"start\":1,\"end\":10},\"projected\":{\"start\":10,\"end\":100},\"comparative\":{\"point\":10}}}],\"orientation\":\"horizontal\"}}"
         Assert.assertEquals( 1, item.get( "measure" ).get( "current" ).get( "start" ).asInt() );
         Assert.assertEquals( 10, item.get( "measure" ).get( "current" ).get( "end" ).asInt() );
         Assert.assertEquals( 10, item.get( "measure" ).get( "projected" ).get( "start" ).asInt() );
@@ -64,4 +65,38 @@ public class BulletGraphTest {
 
     }
 
+    @Test(expected=ValidationException.class)
+    public void testValidateNewObject() {
+        new BulletGraph( "1234",true ).validate();
+    }
+    
+    @Test(expected=ValidationException.class)
+    public void testValidateLabel() {
+        BulletGraph widget = new BulletGraph( "1234", false );
+        widget.setAxisPoints( Arrays.asList( new String[] { "1", "2", "3", "4", "8", "0" } ) );
+
+        widget.setComparative( "10" );
+        widget.setProjected( 10, 100 );
+        widget.setSubLabel( "sub-test-label" );
+        widget.setCurrent( 1, 10 );
+        widget.addRange( 0, 10, RAGColor.RED );
+        widget.addRange( 10, 20, RAGColor.AMBER );
+        widget.addRange( 20, 30, RAGColor.GREEN );
+        widget.validate();
+    }
+
+    @Test(expected=ValidationException.class)
+    public void testValidateComparative() {
+        BulletGraph widget = new BulletGraph( "1234", false );
+        widget.setAxisPoints( Arrays.asList( new String[] { "1", "2", "3", "4", "8", "0" } ) );
+
+        widget.setLabel( "test-label" );
+        widget.setProjected( 10, 100 );
+        widget.setSubLabel( "sub-test-label" );
+        widget.setCurrent( 1, 10 );
+        widget.addRange( 0, 10, RAGColor.RED );
+        widget.addRange( 10, 20, RAGColor.AMBER );
+        widget.addRange( 20, 30, RAGColor.GREEN );
+        widget.validate();
+    }
 }
