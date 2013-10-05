@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import com.github.geckoboard.api.json.serializer.AwtColorTypeAdapter;
 import com.github.highchart.api.base.Style;
-import com.github.highchart.api.datetime.DateTimeLabelFormats;
-import com.github.highchart.api.datetime.DateTimeLabelFormatsSerializer;
+import com.github.highchart.api.format.DateTimeLabelFormats;
+import com.github.highchart.api.serializer.DateTimeLabelFormatsSerializer;
 import com.github.highchart.api.serializer.StyleSerializer;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
