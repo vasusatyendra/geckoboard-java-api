@@ -7,7 +7,7 @@
 		<version>0.1</version>
 	</parent>
 	<artifactId>geckoboard-api</artifactId>
-	<version>0.1</version>
+	<version>0.2-SNAPSHOT</version>
 	<name>Geckoboard java API</name>
 	<description>A Java API to generate highchart json on the server side.</description>
 	<url>http://www.pvanassen.nl</url>
@@ -35,7 +35,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:pvanassen/geckoboard-java-api.git</connection>
 		<developerConnection>scm:git:git@github.com:pvanassen/geckoboard-java-api.git</developerConnection>
-		<tag>geckoboard-api-0.1</tag>
+		<tag>HEAD</tag>
 		<url>https://github.com/pvanassen/geckoboard-java-api</url>
 	</scm>
 	<issueManagement>
