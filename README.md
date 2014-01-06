@@ -17,7 +17,7 @@ Some examples: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
 
 Maven
 -----
-Version 1.0 of this api is available in the central maven repository: 
+Version 0.1.1 of this api is available in the central maven repository: 
 ```Xml
 <dependency>
   <groupId>nl.pvanassen</groupId>
