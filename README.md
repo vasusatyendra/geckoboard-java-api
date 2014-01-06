@@ -1,4 +1,4 @@
-geckoboard-java-api
+Geckoboard java api
 ==============
 
 This is almost a geckoboard java api. 
