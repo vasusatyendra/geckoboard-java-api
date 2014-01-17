@@ -1,4 +1,4 @@
-package nl.pvanassen.geckoboard.api.json.serializer;
+package nl.pvanassen.geckoboard.api.gson;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import com.google.gson.stream.JsonWriter;
  * 
  * @author Paul van Assen
  */
-public class AwtColorTypeAdapter extends TypeAdapter<Color> {
+class AwtColorTypeAdapter extends TypeAdapter<Color> {
 
     @Override
     public Color read( JsonReader in ) throws IOException {
@@ -29,5 +29,4 @@ public class AwtColorTypeAdapter extends TypeAdapter<Color> {
         String colorStr = String.format( "%06X%02X", ( 0xFFFFFF & color.getRGB() ), ( 0xFF & color.getAlpha() ) );
         out.value( colorStr );
     }
-
 }

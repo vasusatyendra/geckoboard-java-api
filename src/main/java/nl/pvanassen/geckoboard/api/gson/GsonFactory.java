@@ -2,7 +2,6 @@ package nl.pvanassen.geckoboard.api.gson;
 
 import java.awt.Color;
 
-import nl.pvanassen.geckoboard.api.json.serializer.AwtColorTypeAdapter;
 import nl.pvanassen.highchart.api.base.Style;
 import nl.pvanassen.highchart.api.format.DateTimeLabelFormats;
 import nl.pvanassen.highchart.api.serializer.DateTimeLabelFormatsSerializer;

@@ -16,7 +16,6 @@ public class BulletGraphItem {
     private String            label;
 
     @SerializedName( "sublabel" )
-    @SuppressWarnings( "unused" )
     private String            subLabel;
 
     private final Axis        axis    = new Axis();
