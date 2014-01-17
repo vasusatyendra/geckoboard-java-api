@@ -1,4 +1,4 @@
-package nl.pvanassen.geckoboard.helper;
+package nl.pvanassen.geckoboard.api;
 
 import java.io.IOException;
 

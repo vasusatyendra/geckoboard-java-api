@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
+import nl.pvanassen.geckoboard.api.JsonTestHelper;
 import nl.pvanassen.geckoboard.api.json.text.TextItemType;
 import nl.pvanassen.geckoboard.api.widget.Text;
-import nl.pvanassen.geckoboard.helper.JsonTestHelper;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;

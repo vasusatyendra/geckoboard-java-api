@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 
+import nl.pvanassen.geckoboard.api.JsonTestHelper;
 import nl.pvanassen.geckoboard.api.widget.HighChart;
-import nl.pvanassen.geckoboard.helper.JsonTestHelper;
 import nl.pvanassen.highchart.api.ChartOptions;
 import nl.pvanassen.highchart.api.Point;
 import nl.pvanassen.highchart.api.Series;
