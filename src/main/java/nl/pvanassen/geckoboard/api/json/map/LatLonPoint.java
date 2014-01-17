@@ -5,7 +5,7 @@ package nl.pvanassen.geckoboard.api.json.map;
  * 
  * @author Paul van Assen
  */
-public class LatLonPoint extends Point {
+public class LatLonPoint extends AbstractPoint {
     @SuppressWarnings( "unused" )
     private final String latitude;
 

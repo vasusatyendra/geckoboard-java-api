@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * 
  * @author Paul van Assen
  */
-public class Point {
+public abstract class AbstractPoint {
 
     @SuppressWarnings( "unused" )
     private Integer    size;
@@ -21,17 +21,17 @@ public class Point {
     @SerializedName( "cssclass" )
     private String cssClass;
 
-    public Point setSize( int size ) {
+    public AbstractPoint setSize( int size ) {
         this.size = size;
         return this;
     }
 
-    public Point setColor( Color color ) {
+    public AbstractPoint setColor( Color color ) {
         this.color = color;
         return this;
     }
 
-    public Point setCssClass( String cssClass ) {
+    public AbstractPoint setCssClass( String cssClass ) {
         this.cssClass = cssClass;
         return this;
     }
