@@ -1,4 +1,4 @@
-geckoboard-java-api
+Geckoboard java api
 ==============
 
 This is almost a geckoboard java api. 
@@ -14,6 +14,17 @@ Already done:
 - Switch from jackson to gson, using object trees instead of pushing stuff 
 
 Some examples: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
+
+Maven
+-----
+Version 0.1.1 of this api is available in the central maven repository: 
+```Xml
+<dependency>
+  <groupId>nl.pvanassen</groupId>
+  <artifactId>geckoboard-api</artifactId>
+  <version>0.1.1</version>
+</dependency>
+```
 
 Copyright and License
 ---------------------
