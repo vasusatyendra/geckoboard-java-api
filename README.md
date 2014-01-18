@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pvanassen/geckoboard-java-api.png?branch=master)](https://travis-ci.org/pvanassen/geckoboard-java-api)
+[![Coverage Status](https://coveralls.io/repos/pvanassen/geckoboard-java-api/badge.png)](https://coveralls.io/r/pvanassen/geckoboard-java-api)
 Geckoboard java api
 ==============
 
