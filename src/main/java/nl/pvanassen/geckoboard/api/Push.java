@@ -9,7 +9,7 @@ public abstract class Push {
         this.widgetKey = widgetKey;
     }
 
-    String getWidgetKey() {
+    final String getWidgetKey() {
         return widgetKey;
     }
 
