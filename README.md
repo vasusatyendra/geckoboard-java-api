@@ -1,19 +1,12 @@
+[![Build Status](https://travis-ci.org/pvanassen/geckoboard-java-api.png?branch=master)](https://travis-ci.org/pvanassen/geckoboard-java-api)
+[![Coverage Status](https://coveralls.io/repos/pvanassen/geckoboard-java-api/badge.png)](https://coveralls.io/r/pvanassen/geckoboard-java-api)
 Geckoboard java api
 ==============
 
-This is almost a geckoboard java api. 
+This repository contains a geckoboard api connector written in Java. It makes use of the JSON api interface described here: http://www.geckoboard.com/developers
 
-Right now the following open tasks remain: 
-
-- Integrate the highchart java api (https://github.com/one2team/highcharts-serverside-export)
-- Build the maps api
-
-Already done: 
-
-- Write tests
-- Switch from jackson to gson, using object trees instead of pushing stuff 
-
-Some examples: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
+Some example code can be found here: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
+And in the unit tests in the code. 
 
 Maven
 -----
