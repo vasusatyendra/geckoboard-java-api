@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import nl.pvanassen.geckoboard.api.JsonTestHelper;
-import nl.pvanassen.geckoboard.api.widget.Map;
+import nl.pvanassen.geckoboard.api.widget.MapWidget;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class MapTest {
     @Test
     public void testJson() throws JsonProcessingException, IOException {
-        Map widget = new Map( "1234" );
+        MapWidget widget = new MapWidget( "1234" );
         widget.addCityPoint( "test1" );
         widget.addCityPoint( "test2", "CA" ).setColor( Color.RED );
         widget.addCityPoint( "test3", "BE", "NL" ).setSize( 1 );

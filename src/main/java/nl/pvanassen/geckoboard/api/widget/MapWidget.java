@@ -16,11 +16,11 @@ import com.google.gson.annotations.SerializedName;
  * 
  * @author Paul van Assen
  */
-public class Map extends Push {
+public class MapWidget extends Push {
     @SerializedName( "points" )
     private final Points points = new Points();
 
-    public Map( String widgetKey ) {
+    public MapWidget( String widgetKey ) {
         super( widgetKey );
     }
 
