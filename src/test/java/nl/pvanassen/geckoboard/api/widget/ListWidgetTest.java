@@ -63,7 +63,7 @@ public class ListWidgetTest {
         JsonNode item4 = node.get( "item" ).get( 3 );
         assertEquals( "TestText4", item4.get( "title" ).get("text").asText());
         assertNull( item4.get( "title" ).get("highlight"));
-        assertNull( item4.get( "label" ));
+        
 
     }
 
