@@ -2,9 +2,6 @@ package nl.pvanassen.geckoboard.api.widget;
 
 import nl.pvanassen.geckoboard.api.Push;
 import nl.pvanassen.geckoboard.api.error.ValidationException;
-import nl.pvanassen.geckoboard.api.json.monitoring.MonitorItem;
-
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Monitoring widget
@@ -12,8 +9,33 @@ import com.google.gson.annotations.SerializedName;
  * @author Paul van Assen
  */
 public class Monitoring extends Push {
-    @SerializedName( "item" )
-    private MonitorItem item;
+    private String status;
+    private String downTime;
+    private String responseTime;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus( String status ) {
+        this.status = status;
+    }
+
+    public String getDownTime() {
+        return downTime;
+    }
+
+    public void setDownTime( String downTime ) {
+        this.downTime = downTime;
+    }
+
+    public String getResponseTime() {
+        return responseTime;
+    }
+
+    public void setResponseTime( String responseTime ) {
+        this.responseTime = responseTime;
+    }
 
     /**
      * Constructor with widget key
@@ -22,24 +44,11 @@ public class Monitoring extends Push {
      */
     public Monitoring( String widgetKey ) {
         super( widgetKey );
-        item = new MonitorItem();
-    }
-
-    public void setStatus( String status ) {
-        item.setStatus( status );
-    }
-
-    public void setDownTime( String downTime ) {
-        item.setDownTime( downTime );
-    }
-
-    public void setResponseTime( String responseTime ) {
-        item.setResponseTime( responseTime );
     }
 
     @Override
     protected void validate() throws ValidationException {
-        if ( item.getStatus() == null ) {
+        if ( status == null ) {
             throw new ValidationException( "status", "Should be filled" );
         }
     }

@@ -24,13 +24,10 @@ public class MonitoringTest {
         Assert.assertNotNull( data.get( "data" ) );
         JsonNode node = data.get( "data" );
         assertNull(node.get( "widgetKey" ));
-
-        assertTrue( node.get( "item" ).isObject() );
         
-        JsonNode monitorItem = node.get("item");
-        assertEquals( "Up", monitorItem.get( "status" ).asText() );
-        assertEquals( "1 ms", monitorItem.get( "responseTime" ).asText() );
-        assertEquals( "10 days", monitorItem.get( "downTime" ).asText() );
+        assertEquals( "Up", node.get( "status" ).asText() );
+        assertEquals( "1 ms", node.get( "responseTime" ).asText() );
+        assertEquals( "10 days", node.get( "downTime" ).asText() );
 
     }
 
