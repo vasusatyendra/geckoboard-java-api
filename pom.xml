@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>parent</artifactId>
@@ -7,7 +8,8 @@
 		<version>0.2</version>
 	</parent>
 	<artifactId>geckoboard-api</artifactId>
-	<version>0.2-SNAPSHOT</version>	<name>Geckoboard java API</name>
+	<version>0.2-SNAPSHOT</version>
+	<name>Geckoboard java API</name>
 	<description>A Java API to generate highchart json on the server side.</description>
 	<url>http://www.pvanassen.nl</url>
 	<organization>
@@ -86,6 +88,15 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>1.46</version>
+			<!-- Include this if you have dependency conflicts for Guava, Jetty, Jackson 
+				or Apache HTTP Client -->
+			<classifier>standalone</classifier>
+			<scope>test</scope>			
 		</dependency>
 	</dependencies>
 </project>

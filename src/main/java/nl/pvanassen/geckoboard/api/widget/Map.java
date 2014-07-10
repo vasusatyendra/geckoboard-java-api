@@ -2,12 +2,7 @@ package nl.pvanassen.geckoboard.api.widget;
 
 import nl.pvanassen.geckoboard.api.Push;
 import nl.pvanassen.geckoboard.api.error.ValidationException;
-import nl.pvanassen.geckoboard.api.json.map.CityPoint;
-import nl.pvanassen.geckoboard.api.json.map.HostPoint;
-import nl.pvanassen.geckoboard.api.json.map.IpPoint;
-import nl.pvanassen.geckoboard.api.json.map.LatLonPoint;
-import nl.pvanassen.geckoboard.api.json.map.Point;
-import nl.pvanassen.geckoboard.api.json.map.Points;
+import nl.pvanassen.geckoboard.api.json.map.*;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -60,7 +55,7 @@ public class Map extends Push {
         return latLonPoint;
     }
     
-    public <T extends Point> T addPoint(T point) {
+    public <T extends AbstractPoint> T addPoint(T point) {
         points.addPoint(point);
         return point;
     }
