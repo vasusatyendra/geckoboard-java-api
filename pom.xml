@@ -4,11 +4,10 @@
 	<parent>
 		<artifactId>parent</artifactId>
 		<groupId>nl.pvanassen</groupId>
-		<version>0.1</version>
+		<version>0.2</version>
 	</parent>
 	<artifactId>geckoboard-api</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
-	<name>Geckoboard java API</name>
+	<version>0.2-SNAPSHOT</version>	<name>Geckoboard java API</name>
 	<description>A Java API to generate highchart json on the server side.</description>
 	<url>http://www.pvanassen.nl</url>
 	<organization>

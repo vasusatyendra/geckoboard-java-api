@@ -12,13 +12,13 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Points {
     @SerializedName( "point" )
-    private List<Point> points = new LinkedList<Point>();
+    private List<AbstractPoint> points = new LinkedList<AbstractPoint>();
 
     /**
      * Adds a point to the push message for geckoboard
      * @param point Point to add. 
      */
-    public void addPoint( Point point ) {
+    public void addPoint( AbstractPoint point ) {
         points.add( point );
     }
 }

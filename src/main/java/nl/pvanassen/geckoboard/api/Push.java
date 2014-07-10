@@ -2,6 +2,11 @@ package nl.pvanassen.geckoboard.api;
 
 import nl.pvanassen.geckoboard.api.error.ValidationException;
 
+/**
+ * Abstract push type. This is the base type of every widget type
+ * 
+ * @author Paul van Assen
+ */
 public abstract class Push {
     private final String widgetKey;
 
@@ -9,7 +14,7 @@ public abstract class Push {
         this.widgetKey = widgetKey;
     }
 
-    String getWidgetKey() {
+    final String getWidgetKey() {
         return widgetKey;
     }
 

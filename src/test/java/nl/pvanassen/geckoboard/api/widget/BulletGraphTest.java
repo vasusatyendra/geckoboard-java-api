@@ -5,10 +5,10 @@ import static org.junit.Assert.assertNull;
 import java.io.IOException;
 import java.util.Arrays;
 
+import nl.pvanassen.geckoboard.api.JsonTestHelper;
 import nl.pvanassen.geckoboard.api.error.ValidationException;
 import nl.pvanassen.geckoboard.api.json.bulletgraph.RAGColor;
 import nl.pvanassen.geckoboard.api.widget.BulletGraph;
-import nl.pvanassen.geckoboard.helper.JsonTestHelper;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;

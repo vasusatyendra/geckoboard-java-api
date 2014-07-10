@@ -7,23 +7,23 @@ import com.google.gson.annotations.SerializedName;
  * 
  * @author Paul van Assen
  */
-public class WidgetWrapper {
+class WidgetWrapper {
     @SerializedName( "data" )
     private final Push   push;
 
     @SerializedName( "api_key" )
     private final String apiKey;
 
-    public WidgetWrapper( Push push, String apiKey ) {
+    WidgetWrapper( Push push, String apiKey ) {
         this.push = push;
         this.apiKey = apiKey;
     }
 
-    public String getApiKey() {
+    String getApiKey() {
         return apiKey;
     }
 
-    public Push getPush() {
+    Push getPush() {
         return push;
     }
 

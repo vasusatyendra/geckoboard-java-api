@@ -26,6 +26,8 @@ public class Geckoboard {
 
     private static final Charset DEFAULT_CHARSET      = Charset.forName( "UTF-8" );
 
+    private String               baseUrl              = "https://push.geckoboard.com/v1/send/";
+
     private static void bestEffortToReleaseHttpWithoutExceptions( final OutputStream httpOutputStream, final InputStream httpInputStream, final HttpURLConnection connection ) {
         IOUtils.closeQuietly( httpOutputStream );
         IOUtils.closeQuietly( httpInputStream );
@@ -37,11 +39,14 @@ public class Geckoboard {
     private final String apiKey;
 
     public Geckoboard( String apiKey ) {
+        if ( apiKey == null || apiKey.trim().isEmpty() ) {
+            throw new IllegalArgumentException( "Api key cannot be null or empty" );
+        }
         this.apiKey = apiKey;
     }
 
     private HttpURLConnection createAndOpenConnection( String widgetKey ) throws IOException {
-        final URL url = new URL( "https://push.geckoboard.com/v1/send/" + widgetKey );
+        final URL url = new URL( baseUrl.concat( widgetKey ) );
         final HttpURLConnection connection = ( HttpURLConnection ) url.openConnection();
         connection.addRequestProperty( CONTENT_TYPE, CONTENT_TYPE_VALUE );
         connection.setDoOutput( true );
@@ -52,6 +57,9 @@ public class Geckoboard {
     }
 
     public void push( Push push ) throws IOException {
+        if ( push == null ) {
+            throw new IllegalArgumentException( "Push cannot be empty" );
+        }
         WidgetWrapper wrapper = new WidgetWrapper( push, apiKey );
         Gson gson = GsonFactory.getGson();
         String json = gson.toJson( wrapper );
@@ -74,5 +82,14 @@ public class Geckoboard {
         finally {
             bestEffortToReleaseHttpWithoutExceptions( httpOutputStream, httpInputStream, connection );
         }
+    }
+
+    /**
+     * Overriding of the base url. The default is 'https://push.geckoboard.com/v1/send/'
+     * 
+     * @param baseUrl New base url to use
+     */
+    public void setBaseUrl( String baseUrl ) {
+        this.baseUrl = baseUrl;
     }
 }

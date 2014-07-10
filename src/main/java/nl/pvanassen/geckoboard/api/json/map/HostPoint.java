@@ -5,7 +5,7 @@ package nl.pvanassen.geckoboard.api.json.map;
  * @author Paul van Assen
  *
  */
-public class HostPoint extends Point {
+public class HostPoint extends AbstractPoint {
     @SuppressWarnings( "unused" )
     private final String host;
 

@@ -5,7 +5,7 @@ package nl.pvanassen.geckoboard.api.json.map;
  * @author Paul van Assen
  *
  */
-public class CityPoint extends Point {
+public class CityPoint extends AbstractPoint {
     @SuppressWarnings( "unused" )
     private final City city;
 

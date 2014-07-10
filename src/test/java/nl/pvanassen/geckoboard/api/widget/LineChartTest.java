@@ -7,10 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.Arrays;
-
+import nl.pvanassen.geckoboard.api.JsonTestHelper;
 import nl.pvanassen.geckoboard.api.error.ValidationException;
 import nl.pvanassen.geckoboard.api.widget.LineChart;
-import nl.pvanassen.geckoboard.helper.JsonTestHelper;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
