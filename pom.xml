@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>parent</artifactId>
@@ -8,7 +7,7 @@
 		<version>0.3</version>
 	</parent>
 	<artifactId>geckoboard-api</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 	<name>Geckoboard java API</name>
 	<description>A Java API to generate highchart json on the server side.</description>
 	<url>http://www.pvanassen.nl</url>
@@ -36,7 +35,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:pvanassen/geckoboard-java-api.git</connection>
 		<developerConnection>scm:git:git@github.com:pvanassen/geckoboard-java-api.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>geckoboard-api-0.1.2</tag>
 		<url>https://github.com/pvanassen/geckoboard-java-api</url>
 	</scm>
 	<issueManagement>
