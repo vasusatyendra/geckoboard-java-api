@@ -19,7 +19,7 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 public class GeckoboardTest {
 
     @Rule
-    public WireMockRule wireMockRule = new WireMockRule(8080);
+    public WireMockRule wireMockRule = new WireMockRule(68574);
 
     @Test(expected = IllegalArgumentException.class)
     public void testGeckoboardEmpty() {
@@ -47,7 +47,7 @@ public class GeckoboardTest {
                                 .withBody("<response>Some content</response>")));
 
         Geckoboard geckoboard = new Geckoboard("test");
-        geckoboard.setBaseUrl("http://localhost:8080/");
+        geckoboard.setBaseUrl("http://localhost:68574/");
         geckoboard.push(new MockedPush());
         /*
          * assertTrue(result.wasSuccessFul());
