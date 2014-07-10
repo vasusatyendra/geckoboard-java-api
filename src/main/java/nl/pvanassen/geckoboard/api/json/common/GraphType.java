@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Generic graph type
- * 
+ *
  * @author Paul van Assen
  */
 public enum GraphType {
     /**
      * Standard graph
      */
-    @SerializedName( "standard" )
+    @SerializedName("standard")
     STANDARD,
     /**
      * Reverse graph
      */
-    @SerializedName( "reverse" )
+    @SerializedName("reverse")
     REVERSE;
 }

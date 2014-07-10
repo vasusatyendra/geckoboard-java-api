@@ -3,8 +3,6 @@ package nl.pvanassen.geckoboard.api.widget;
 import java.util.LinkedList;
 import java.util.List;
 
-
-
 import nl.pvanassen.geckoboard.api.Push;
 import nl.pvanassen.geckoboard.api.error.ValidationException;
 import nl.pvanassen.geckoboard.api.json.common.GraphType;
@@ -15,26 +13,27 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Element for submiting data to the funnel graph
  * http://www.geckoboard.com/developers/custom-widgets/widget-types/funnel-graph/
- * 
+ *
  * @author Paul van Assen
  */
 public class FunnelGraph extends Push {
-    @SerializedName( "item" )
+
+    @SerializedName("item")
     private final List<LabelValueItem> items = new LinkedList<LabelValueItem>();
 
-    @SerializedName( "type" )
-    private final GraphType            graphType;
+    @SerializedName("type")
+    private final GraphType graphType;
 
-    private final String               percentage;
+    private final String percentage;
 
-    public FunnelGraph( String widgetKey, boolean showPercentage ) {
-        this( widgetKey, GraphType.STANDARD, showPercentage );
+    public FunnelGraph(String widgetKey, boolean showPercentage) {
+        this(widgetKey, GraphType.STANDARD, showPercentage);
     }
 
-    public FunnelGraph( String widgetKey, GraphType graphType, boolean showPercentage ) {
-        super( widgetKey );
+    public FunnelGraph(String widgetKey, GraphType graphType, boolean showPercentage) {
+        super(widgetKey);
         this.graphType = graphType;
-        if ( showPercentage ) {
+        if (showPercentage) {
             percentage = "show";
         }
         else {
@@ -42,20 +41,20 @@ public class FunnelGraph extends Push {
         }
     }
 
-    public void addData( String label, String value ) {
-        items.add( new LabelValueItem( label, value ) );
+    public void addData(String label, String value) {
+        items.add(new LabelValueItem(label, value));
     }
 
     @Override
     protected void validate() throws ValidationException {
-        if ( items.size() == 0 ) {
-            throw new ValidationException( "item", "Items cannot be empty" );
+        if (items.size() == 0) {
+            throw new ValidationException("item", "Items cannot be empty");
         }
-        if ( graphType == null ) {
-            throw new ValidationException( "graphType", "Cannot be null" );
+        if (graphType == null) {
+            throw new ValidationException("graphType", "Cannot be null");
         }
-        if ( percentage == null ) {
-            throw new ValidationException( "percentage", "Cannot be null" );
+        if (percentage == null) {
+            throw new ValidationException("percentage", "Cannot be null");
         }
     }
 }

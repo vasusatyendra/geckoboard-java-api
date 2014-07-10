@@ -16,80 +16,84 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 public class Geckoboard {
-    private final Logger         logger               = LoggerFactory.getLogger( getClass() );
 
-    private static final int     RECOMMENDED_TIME_OUT = 70000;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static final String  CONTENT_TYPE         = "Content-Type";
+    private static final int RECOMMENDED_TIME_OUT = 70000;
 
-    private static final String  CONTENT_TYPE_VALUE   = "application/json";
+    private static final String CONTENT_TYPE = "Content-Type";
 
-    private static final Charset DEFAULT_CHARSET      = Charset.forName( "UTF-8" );
+    private static final String CONTENT_TYPE_VALUE = "application/json";
 
-    private String               baseUrl              = "https://push.geckoboard.com/v1/send/";
+    private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-    private static void bestEffortToReleaseHttpWithoutExceptions( final OutputStream httpOutputStream, final InputStream httpInputStream, final HttpURLConnection connection ) {
-        IOUtils.closeQuietly( httpOutputStream );
-        IOUtils.closeQuietly( httpInputStream );
-        if ( connection != null ) {
+    private String baseUrl = "https://push.geckoboard.com/v1/send/";
+
+    private static void bestEffortToReleaseHttpWithoutExceptions(final OutputStream httpOutputStream,
+            final InputStream httpInputStream, final HttpURLConnection connection) {
+        IOUtils.closeQuietly(httpOutputStream);
+        IOUtils.closeQuietly(httpInputStream);
+        if (connection != null) {
             connection.disconnect();
         }
     }
 
     private final String apiKey;
 
-    public Geckoboard( String apiKey ) {
-        if ( apiKey == null || apiKey.trim().isEmpty() ) {
-            throw new IllegalArgumentException( "Api key cannot be null or empty" );
+    public Geckoboard(String apiKey) {
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalArgumentException("Api key cannot be null or empty");
         }
         this.apiKey = apiKey;
     }
 
-    private HttpURLConnection createAndOpenConnection( String widgetKey ) throws IOException {
-        final URL url = new URL( baseUrl.concat( widgetKey ) );
-        final HttpURLConnection connection = ( HttpURLConnection ) url.openConnection();
-        connection.addRequestProperty( CONTENT_TYPE, CONTENT_TYPE_VALUE );
-        connection.setDoOutput( true );
-        connection.setRequestMethod( "POST" );
-        connection.setConnectTimeout( RECOMMENDED_TIME_OUT );
-        connection.setReadTimeout( RECOMMENDED_TIME_OUT );
+    private HttpURLConnection createAndOpenConnection(String widgetKey) throws IOException {
+        final URL url = new URL(baseUrl.concat(widgetKey));
+        final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.addRequestProperty(Geckoboard.CONTENT_TYPE, Geckoboard.CONTENT_TYPE_VALUE);
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.setConnectTimeout(Geckoboard.RECOMMENDED_TIME_OUT);
+        connection.setReadTimeout(Geckoboard.RECOMMENDED_TIME_OUT);
         return connection;
     }
 
-    public void push( Push push ) throws IOException {
-        if ( push == null ) {
-            throw new IllegalArgumentException( "Push cannot be empty" );
+    public void push(Push push) throws IOException {
+        if (push == null) {
+            throw new IllegalArgumentException("Push cannot be empty");
         }
-        WidgetWrapper wrapper = new WidgetWrapper( push, apiKey );
+        WidgetWrapper wrapper = new WidgetWrapper(push, apiKey);
         Gson gson = GsonFactory.getGson();
-        String json = gson.toJson( wrapper );
+        String json = gson.toJson(wrapper);
         HttpURLConnection connection = null;
         OutputStream httpOutputStream = null;
         InputStream httpInputStream = null;
         try {
-            connection = createAndOpenConnection( push.getWidgetKey() );
+            connection = createAndOpenConnection(push.getWidgetKey());
             httpOutputStream = connection.getOutputStream();
-            logger.info( "Sending: " + json );
-            IOUtils.write( json.getBytes( DEFAULT_CHARSET ), httpOutputStream );
-            if ( connection.getResponseCode() >= 400 ) {
-                logger.error( "Error sending json, error: " + new String( IOUtils.toByteArray( connection.getErrorStream() ), DEFAULT_CHARSET ) + ", json send: " + json );
+            logger.info("Sending: " + json);
+            IOUtils.write(json.getBytes(Geckoboard.DEFAULT_CHARSET), httpOutputStream);
+            if (connection.getResponseCode() >= 400) {
+                logger.error("Error sending json, error: "
+                        + new String(IOUtils.toByteArray(connection.getErrorStream()), Geckoboard.DEFAULT_CHARSET)
+                        + ", json send: " + json);
                 return;
             }
             httpInputStream = connection.getInputStream();
-            final byte[] responseXml = IOUtils.toByteArray( httpInputStream );
-            logger.info( new String( responseXml, DEFAULT_CHARSET ) );
+            final byte[] responseXml = IOUtils.toByteArray(httpInputStream);
+            logger.info(new String(responseXml, Geckoboard.DEFAULT_CHARSET));
         }
         finally {
-            bestEffortToReleaseHttpWithoutExceptions( httpOutputStream, httpInputStream, connection );
+            Geckoboard.bestEffortToReleaseHttpWithoutExceptions(httpOutputStream, httpInputStream, connection);
         }
     }
 
     /**
      * Overriding of the base url. The default is 'https://push.geckoboard.com/v1/send/'
-     * 
+     *
      * @param baseUrl New base url to use
      */
-    public void setBaseUrl( String baseUrl ) {
+    public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 }

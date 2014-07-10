@@ -11,32 +11,33 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * List widget type http://www.geckoboard.com/developers/custom-widgets/widget-types/list
- * 
+ *
  * @author Paul van Assen
  */
 public class ListWidget extends Push {
-    @SerializedName( "item" )
+
+    @SerializedName("item")
     private final List<ListItem> items = new LinkedList<ListItem>();
 
-    protected ListWidget( String widgetKey ) {
-        super( widgetKey );
+    protected ListWidget(String widgetKey) {
+        super(widgetKey);
     }
 
     /**
      * Create an item that can be filled by the app
-     * 
+     *
      * @return A newly created item
      */
     public ListItem createItem(String text) {
         ListItem item = new ListItem(text);
-        items.add( item );
+        items.add(item);
         return item;
     }
 
     @Override
     protected void validate() throws ValidationException {
-        if ( items.size() == 0 ) {
-            throw new ValidationException( "Items", "Must be filled" );
+        if (items.size() == 0) {
+            throw new ValidationException("Items", "Must be filled");
         }
     }
 

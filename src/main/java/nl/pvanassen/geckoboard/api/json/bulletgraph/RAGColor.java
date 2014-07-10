@@ -4,23 +4,23 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Red Amber Green enum for use in a bullet graph
- * 
+ *
  * @author Paul van Assen
  */
 public enum RAGColor {
     /**
      * Red color
      */
-    @SerializedName( "red" )
+    @SerializedName("red")
     RED,
     /**
      * Amber color
      */
-    @SerializedName( "amber" )
+    @SerializedName("amber")
     AMBER,
     /**
      * Green color
      */
-    @SerializedName( "green" )
+    @SerializedName("green")
     GREEN;
 }

@@ -2,6 +2,7 @@ package nl.pvanassen.geckoboard.api.json.common;
 
 /**
  * Text value prefix item for generic use
+ * 
  * @author Paul van Assen
  *
  */
@@ -9,8 +10,8 @@ public class TextValuePrefixItem extends TextValueItem {
 
     private final String prefix;
 
-    public TextValuePrefixItem( String text, int value, String prefix ) {
-        super( text, value );
+    public TextValuePrefixItem(String text, int value, String prefix) {
+        super(text, value);
         this.prefix = prefix;
     }
 

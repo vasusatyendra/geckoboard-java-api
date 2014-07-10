@@ -8,16 +8,17 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Settings class for linechart
- * 
+ *
  * @author Paul van Assen
  */
 public class LineChartSettings {
+
     private final List<String> axisx = new LinkedList<String>();
 
     private final List<String> axisy = new LinkedList<String>();
 
-    @SerializedName( "colour" )
-    private Color              color;
+    @SerializedName("colour")
+    private Color color;
 
     public List<String> getAxisx() {
         return axisx;
@@ -27,7 +28,7 @@ public class LineChartSettings {
         return axisy;
     }
 
-    public void setColor( Color color ) {
+    public void setColor(Color color) {
         this.color = color;
     }
 

@@ -7,11 +7,12 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Axis class for bullet graph
- * 
+ *
  * @author Paul van Assen
  */
 public class Axis {
-    @SerializedName( "point" )
+
+    @SerializedName("point")
     private final List<String> points = new LinkedList<String>();
 
     public List<String> getPoints() {

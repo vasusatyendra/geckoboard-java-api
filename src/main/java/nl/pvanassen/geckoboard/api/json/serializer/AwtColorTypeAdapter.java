@@ -9,25 +9,25 @@ import com.google.gson.stream.JsonWriter;
 
 /**
  * Type adapter to convert awt to json
- * 
+ *
  * @author Paul van Assen
  */
 public class AwtColorTypeAdapter extends TypeAdapter<Color> {
 
     @Override
-    public Color read( JsonReader in ) throws IOException {
+    public Color read(JsonReader in) throws IOException {
         // We only do writing atm
         return null;
     }
 
     @Override
-    public void write( JsonWriter out, Color color ) throws IOException {
+    public void write(JsonWriter out, Color color) throws IOException {
         if (color == null) {
             out.nullValue();
             return;
         }
-        String colorStr = String.format( "%06X%02X", ( 0xFFFFFF & color.getRGB() ), ( 0xFF & color.getAlpha() ) );
-        out.value( colorStr );
+        String colorStr = String.format("%06X%02X", 0xFFFFFF & color.getRGB(), 0xFF & color.getAlpha());
+        out.value(colorStr);
     }
 
 }
