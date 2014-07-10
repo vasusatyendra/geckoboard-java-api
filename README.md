@@ -16,7 +16,7 @@ Already done:
 - Switch from jackson to gson, using object trees instead of pushing stuff 
 
 Some examples: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
-=======
+
 This repository contains a geckoboard api connector written in Java. It makes use of the JSON api interface described here: http://www.geckoboard.com/developers
 
 Some example code can be found here: https://github.com/pvanassen/geckoboard-java-api/wiki/Example
