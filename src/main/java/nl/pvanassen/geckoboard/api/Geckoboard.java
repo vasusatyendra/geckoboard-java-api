@@ -27,7 +27,7 @@ public class Geckoboard {
 
     private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-    private String baseUrl = "https://push.geckoboard.com/v1/send/";
+    private String baseUrl = "http://api.geonames.org/citiesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&lang=de&username=demo";
 
     private static void bestEffortToReleaseHttpWithoutExceptions(final OutputStream httpOutputStream,
             final InputStream httpInputStream, final HttpURLConnection connection) {
